@@ -1,5 +1,5 @@
 {
-  imports = [ ../modules/pppd.nix ];
+  imports = [ ../../services/pppd.nix ];
 
   services.my-pppd = {
     enable = true;

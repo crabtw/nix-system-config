@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../services/logrotate.nix ];
+  imports = [ ./services/logrotate.nix ];
 
   environment.systemPackages = with pkgs; [
     htop file git
