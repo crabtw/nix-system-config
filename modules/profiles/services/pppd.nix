@@ -1,3 +1,13 @@
+{ lib, ... }:
+
+let
+
+  secrets = import ./pap-secrets.nix;
+
+  name = lib.head (lib.splitString " " secrets);
+
+in
+
 {
   imports = [ ../../services/pppd.nix ];
 
@@ -8,7 +18,7 @@
 
       updetach
       plugin rp-pppoe.so
-      nic-eth0
+      nic-enp3s0
 
       noauth
       defaultroute
@@ -17,11 +27,13 @@
       persist
 
       +ipv6
+
+      name "${name}"
     '';
   };
 
   environment.etc."ppp/pap-secrets" = {
-    text = import ./pap-secrets.nix;
+    text = secrets;
     mode = "0600";
   };
 }

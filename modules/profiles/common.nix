@@ -1,10 +1,12 @@
-{ pkgs, ... }:
+{ options, pkgs, ... }:
 
 {
   imports = [ ./services/logrotate.nix ];
 
   environment.systemPackages = with pkgs; [
-    htop file git
+    htop
+    file
+    git
   ];
 
   programs.vim.defaultEditor = true;
@@ -23,4 +25,8 @@
   nixpkgs.config = {
     allowUnfree = true;
   };
+
+  nixpkgs.overlays = [
+    (import ../../overlays/local.nix)
+  ];
 }
