@@ -16,7 +16,14 @@ let
       sha256 = "16hfmld9pa0hir6bva9hiiwhc7hw2knx81y65v2pv78df483nn7w";
     };
 
-    postPatch = lib.replaceStrings [ "./module/zfs/zfs_ctldir.c" ] [ "./module/os/linux/zfs/zfs_ctldir.c" ] old.postPatch;
+    postPatch = lib.replaceStrings
+      [ "./module/zfs/zfs_ctldir.c"
+        "./lib/libzfs/libzfs_mount.c"
+      ]
+      [ "./module/os/linux/zfs/zfs_ctldir.c"
+        "./lib/libzfs/os/linux/libzfs_mount_os.c"
+      ]
+      old.postPatch;
   };
 
   makeNewVer = old:
