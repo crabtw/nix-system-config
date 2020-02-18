@@ -1,7 +1,10 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./common.nix ];
+  imports = [
+    ./common.nix
+    ./fonts/fontconfig
+  ];
 
   environment.systemPackages = with pkgs; [
     libva-utils
@@ -34,6 +37,4 @@
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  fonts.fontconfig.useEmbeddedBitmaps = true;
 }
