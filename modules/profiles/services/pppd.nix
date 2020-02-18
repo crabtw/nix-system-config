@@ -2,7 +2,7 @@
 
 let
 
-  secrets = import ./pap-secrets.nix;
+  secrets = lib.readFile ./pap-secrets;
 
   name = lib.head (lib.splitString " " secrets);
 
