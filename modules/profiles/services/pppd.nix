@@ -4,14 +4,12 @@ let
 
   secrets = lib.readFile ./pap-secrets;
 
-  name = lib.head (lib.splitString " " secrets);
+  name = lib.head (lib.remove "" (lib.splitString " " secrets));
 
 in
 
 {
-  imports = [ ../../services/pppd.nix ];
-
-  services.my-pppd = {
+  services.pppd = {
     enable = true;
     peers.default.config = ''
       linkname "ppp.float"
