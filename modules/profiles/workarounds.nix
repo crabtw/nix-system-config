@@ -3,5 +3,5 @@
     ../security/rngd.nix
   ];
 
-  security.my-rngd = true;
+  security.my-rngd.enable = true;
 }

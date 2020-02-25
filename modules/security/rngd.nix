@@ -26,7 +26,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    security.rngd = false;
+    security.rngd.enable = lib.mkForce false;
 
     services.udev.extraRules = ''
       KERNEL=="random", TAG+="systemd"
