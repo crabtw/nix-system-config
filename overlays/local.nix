@@ -16,6 +16,8 @@ let
       sha256 = "16hfmld9pa0hir6bva9hiiwhc7hw2knx81y65v2pv78df483nn7w";
     };
 
+    patches = if old ? extraPatches then old.extraPatches else [];
+
     postPatch = lib.replaceStrings
       [ "./module/zfs/zfs_ctldir.c"
         "./lib/libzfs/libzfs_mount.c"

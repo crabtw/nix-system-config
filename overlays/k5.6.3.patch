@@ -1,0 +1,440 @@
+diff --git a/META b/META
+index 39828e0a1..49d8bd73d 100644
+--- a/META
++++ b/META
+@@ -6,5 +6,5 @@ Release:       1
+ Release-Tags:  relext
+ License:       CDDL
+ Author:        OpenZFS on Linux
+-Linux-Maximum: 5.4
++Linux-Maximum: 5.6
+ Linux-Minimum: 3.10
+diff --git a/config/kernel-inode-times.m4 b/config/kernel-inode-times.m4
+index 57e7f31fd..8a79c299e 100644
+--- a/config/kernel-inode-times.m4
++++ b/config/kernel-inode-times.m4
+@@ -1,8 +1,22 @@
+-dnl #
+-dnl # 4.18 API change
+-dnl # i_atime, i_mtime, and i_ctime changed from timespec to timespec64.
+-dnl #
+ AC_DEFUN([ZFS_AC_KERNEL_SRC_INODE_TIMES], [
++
++	dnl #
++	dnl # 5.6 API change
++	dnl # timespec64_trunc() replaced by timestamp_truncate() interface.
++	dnl #
++	ZFS_LINUX_TEST_SRC([timestamp_truncate], [
++		#include <linux/fs.h>
++	],[
++		struct timespec64 ts;
++		struct inode ip;
++
++		ts = timestamp_truncate(ts, &ip);
++	])
++
++	dnl #
++	dnl # 4.18 API change
++	dnl # i_atime, i_mtime, and i_ctime changed from timespec to timespec64.
++	dnl #
+ 	ZFS_LINUX_TEST_SRC([inode_times], [
+ 		#include <linux/fs.h>
+ 	],[
+@@ -15,6 +29,15 @@ AC_DEFUN([ZFS_AC_KERNEL_SRC_INODE_TIMES], [
+ ])
+ 
+ AC_DEFUN([ZFS_AC_KERNEL_INODE_TIMES], [
++	AC_MSG_CHECKING([whether timestamp_truncate() exists])
++	ZFS_LINUX_TEST_RESULT([timestamp_truncate], [
++		AC_MSG_RESULT(yes)
++		AC_DEFINE(HAVE_INODE_TIMESTAMP_TRUNCATE, 1,
++		    [timestamp_truncate() exists])
++	],[
++		AC_MSG_RESULT(no)
++	])
++
+ 	AC_MSG_CHECKING([whether inode->i_*time's are timespec64])
+ 	ZFS_LINUX_TEST_RESULT([inode_times], [
+ 		AC_MSG_RESULT(no)
+diff --git a/config/kernel-ktime_get_coarse_real_ts64.m4 b/config/kernel-ktime_get_coarse_real_ts64.m4
+deleted file mode 100644
+index 28492bf04..000000000
+--- a/config/kernel-ktime_get_coarse_real_ts64.m4
++++ /dev/null
+@@ -1,23 +0,0 @@
+-dnl #
+-dnl # 4.18: ktime_get_coarse_real_ts64() added.  Use it in place of
+-dnl # current_kernel_time64().
+-dnl #
+-AC_DEFUN([ZFS_AC_KERNEL_SRC_KTIME_GET_COARSE_REAL_TS64], [
+-	ZFS_LINUX_TEST_SRC([ktime_get_coarse_real_ts64], [
+-		#include <linux/mm.h>
+-	], [
+-		struct timespec64 ts;
+-		ktime_get_coarse_real_ts64(&ts);
+-	])
+-])
+-
+-AC_DEFUN([ZFS_AC_KERNEL_KTIME_GET_COARSE_REAL_TS64], [
+-	AC_MSG_CHECKING([whether ktime_get_coarse_real_ts64() exists])
+-	ZFS_LINUX_TEST_RESULT([ktime_get_coarse_real_ts64], [
+-		AC_MSG_RESULT(yes)
+-		AC_DEFINE(HAVE_KTIME_GET_COARSE_REAL_TS64, 1,
+-		    [ktime_get_coarse_real_ts64() exists])
+-	], [
+-		AC_MSG_RESULT(no)
+-	])
+-])
+diff --git a/config/kernel.m4 b/config/kernel.m4
+index ec8f6a5c1..f19959101 100644
+--- a/config/kernel.m4
++++ b/config/kernel.m4
+@@ -52,6 +52,7 @@ AC_DEFUN([ZFS_AC_KERNEL_TEST_SRC], [
+ 	ZFS_AC_KERNEL_SRC_RW
+ 	ZFS_AC_KERNEL_SRC_TIMER_SETUP
+ 	ZFS_AC_KERNEL_SRC_SUPER_USER_NS
++	ZFS_AC_KERNEL_SRC_PROC_OPERATIONS
+ 	ZFS_AC_KERNEL_SRC_BLOCK_DEVICE_OPERATIONS
+ 	ZFS_AC_KERNEL_SRC_BIO
+ 	ZFS_AC_KERNEL_SRC_BLKDEV
+@@ -113,7 +114,7 @@ AC_DEFUN([ZFS_AC_KERNEL_TEST_SRC], [
+ 	ZFS_AC_KERNEL_SRC_CURRENT_TIME
+ 	ZFS_AC_KERNEL_SRC_USERNS_CAPABILITIES
+ 	ZFS_AC_KERNEL_SRC_IN_COMPAT_SYSCALL
+-	ZFS_AC_KERNEL_SRC_KTIME_GET_COARSE_REAL_TS64
++	ZFS_AC_KERNEL_SRC_KTIME
+ 	ZFS_AC_KERNEL_SRC_TOTALRAM_PAGES_FUNC
+ 	ZFS_AC_KERNEL_SRC_TOTALHIGH_PAGES
+ 	ZFS_AC_KERNEL_SRC_KSTRTOUL
+@@ -145,6 +146,7 @@ AC_DEFUN([ZFS_AC_KERNEL_TEST_RESULT], [
+ 	ZFS_AC_KERNEL_RW
+ 	ZFS_AC_KERNEL_TIMER_SETUP
+ 	ZFS_AC_KERNEL_SUPER_USER_NS
++	ZFS_AC_KERNEL_PROC_OPERATIONS
+ 	ZFS_AC_KERNEL_BLOCK_DEVICE_OPERATIONS
+ 	ZFS_AC_KERNEL_BIO
+ 	ZFS_AC_KERNEL_BLKDEV
+@@ -206,7 +208,7 @@ AC_DEFUN([ZFS_AC_KERNEL_TEST_RESULT], [
+ 	ZFS_AC_KERNEL_CURRENT_TIME
+ 	ZFS_AC_KERNEL_USERNS_CAPABILITIES
+ 	ZFS_AC_KERNEL_IN_COMPAT_SYSCALL
+-	ZFS_AC_KERNEL_KTIME_GET_COARSE_REAL_TS64
++	ZFS_AC_KERNEL_KTIME
+ 	ZFS_AC_KERNEL_TOTALRAM_PAGES_FUNC
+ 	ZFS_AC_KERNEL_TOTALHIGH_PAGES
+ 	ZFS_AC_KERNEL_KSTRTOUL
+diff --git a/include/os/linux/spl/sys/kstat.h b/include/os/linux/spl/sys/kstat.h
+index 3ce474248..c93c53171 100644
+--- a/include/os/linux/spl/sys/kstat.h
++++ b/include/os/linux/spl/sys/kstat.h
+@@ -152,6 +152,12 @@ typedef struct kstat_named_s {
+ #define	KSTAT_NAMED_STR_PTR(knptr) ((knptr)->value.string.addr.ptr)
+ #define	KSTAT_NAMED_STR_BUFLEN(knptr) ((knptr)->value.string.len)
+ 
++#ifdef HAVE_PROC_OPS_STRUCT
++typedef struct proc_ops kstat_proc_op_t;
++#else
++typedef struct file_operations kstat_proc_op_t;
++#endif
++
+ typedef struct kstat_intr {
+ 	uint_t intrs[KSTAT_NUM_INTRS];
+ } kstat_intr_t;
+@@ -197,7 +203,7 @@ extern void kstat_proc_entry_init(kstat_proc_entry_t *kpep,
+     const char *module, const char *name);
+ extern void kstat_proc_entry_delete(kstat_proc_entry_t *kpep);
+ extern void kstat_proc_entry_install(kstat_proc_entry_t *kpep, mode_t mode,
+-    const struct file_operations *file_ops, void *data);
++    const kstat_proc_op_t *file_ops, void *data);
+ 
+ extern void __kstat_install(kstat_t *ksp);
+ extern void __kstat_delete(kstat_t *ksp);
+diff --git a/include/os/linux/spl/sys/time.h b/include/os/linux/spl/sys/time.h
+index 312415b7b..4309c300b 100644
+--- a/include/os/linux/spl/sys/time.h
++++ b/include/os/linux/spl/sys/time.h
+@@ -85,7 +85,7 @@ gethrestime(inode_timespec_t *ts)
+ #endif
+ }
+ 
+-static inline time_t
++static inline uint64_t
+ gethrestime_sec(void)
+ {
+ #if defined(HAVE_INODE_TIMESPEC64_TIMES)
+@@ -105,8 +105,13 @@ gethrestime_sec(void)
+ static inline hrtime_t
+ gethrtime(void)
+ {
++#if defined(HAVE_KTIME_GET_RAW_TS64)
++	struct timespec64 ts;
++	ktime_get_raw_ts64(&ts);
++#else
+ 	struct timespec ts;
+ 	getrawmonotonic(&ts);
++#endif
+ 	return (((hrtime_t)ts.tv_sec * NSEC_PER_SEC) + ts.tv_nsec);
+ }
+ 
+diff --git a/include/os/linux/zfs/sys/zpl.h b/include/os/linux/zfs/sys/zpl.h
+index 20a3dc674..ef5a0b842 100644
+--- a/include/os/linux/zfs/sys/zpl.h
++++ b/include/os/linux/zfs/sys/zpl.h
+@@ -170,13 +170,14 @@ zpl_dir_emit_dots(struct file *file, zpl_dir_context_t *ctx)
+ }
+ #endif /* HAVE_VFS_ITERATE */
+ 
+-/*
+- * Linux 4.18, inode times converted from timespec to timespec64.
+- */
+-#if defined(HAVE_INODE_TIMESPEC64_TIMES)
+-#define	zpl_inode_timespec_trunc(ts, gran)	timespec64_trunc(ts, gran)
++#if defined(HAVE_INODE_TIMESTAMP_TRUNCATE)
++#define	zpl_inode_timestamp_truncate(ts, ip)	timestamp_truncate(ts, ip)
++#elif defined(HAVE_INODE_TIMESPEC64_TIMES)
++#define	zpl_inode_timestamp_truncate(ts, ip)	\
++	timespec64_trunc(ts, (ip)->i_sb->s_time_gran)
+ #else
+-#define	zpl_inode_timespec_trunc(ts, gran)	timespec_trunc(ts, gran)
++#define	zpl_inode_timestamp_truncate(ts, ip)	\
++	timespec_trunc(ts, (ip)->i_sb->s_time_gran)
+ #endif
+ 
+ #endif	/* _SYS_ZPL_H */
+diff --git a/include/sys/vdev_impl.h b/include/sys/vdev_impl.h
+index 4f63e1ae5..b55871a5d 100644
+--- a/include/sys/vdev_impl.h
++++ b/include/sys/vdev_impl.h
+@@ -272,7 +272,7 @@ struct vdev {
+ 	range_tree_t	*vdev_initialize_tree;	/* valid while initializing */
+ 	uint64_t	vdev_initialize_bytes_est;
+ 	uint64_t	vdev_initialize_bytes_done;
+-	time_t		vdev_initialize_action_time;	/* start and end time */
++	uint64_t	vdev_initialize_action_time;	/* start and end time */
+ 
+ 	/* TRIM related */
+ 	boolean_t	vdev_trim_exit_wanted;
+@@ -293,7 +293,7 @@ struct vdev {
+ 	uint64_t	vdev_trim_rate;		/* requested rate (bytes/sec) */
+ 	uint64_t	vdev_trim_partial;	/* requested partial TRIM */
+ 	uint64_t	vdev_trim_secure;	/* requested secure TRIM */
+-	time_t		vdev_trim_action_time;	/* start and end time */
++	uint64_t	vdev_trim_action_time;	/* start and end time */
+ 
+ 	/* for limiting outstanding I/Os (initialize and TRIM) */
+ 	kmutex_t	vdev_initialize_io_lock;
+diff --git a/module/os/linux/spl/spl-kstat.c b/module/os/linux/spl/spl-kstat.c
+index 75565d082..b971b4498 100644
+--- a/module/os/linux/spl/spl-kstat.c
++++ b/module/os/linux/spl/spl-kstat.c
+@@ -507,12 +507,20 @@ proc_kstat_write(struct file *filp, const char __user *buf, size_t len,
+ 	return (len);
+ }
+ 
+-static struct file_operations proc_kstat_operations = {
++static const kstat_proc_op_t proc_kstat_operations = {
++#ifdef HAVE_PROC_OPS_STRUCT
++	.proc_open	= proc_kstat_open,
++	.proc_write	= proc_kstat_write,
++	.proc_read	= seq_read,
++	.proc_lseek	= seq_lseek,
++	.proc_release	= seq_release,
++#else
+ 	.open		= proc_kstat_open,
+ 	.write		= proc_kstat_write,
+ 	.read		= seq_read,
+ 	.llseek		= seq_lseek,
+ 	.release	= seq_release,
++#endif
+ };
+ 
+ void
+@@ -656,7 +664,7 @@ kstat_detect_collision(kstat_proc_entry_t *kpep)
+  */
+ void
+ kstat_proc_entry_install(kstat_proc_entry_t *kpep, mode_t mode,
+-    const struct file_operations *file_ops, void *data)
++    const kstat_proc_op_t *proc_ops, void *data)
+ {
+ 	kstat_module_t *module;
+ 	kstat_proc_entry_t *tmp = NULL;
+@@ -690,7 +698,7 @@ kstat_proc_entry_install(kstat_proc_entry_t *kpep, mode_t mode,
+ 
+ 	kpep->kpe_owner = module;
+ 	kpep->kpe_proc = proc_create_data(kpep->kpe_name, mode,
+-	    module->ksm_proc, file_ops, data);
++	    module->ksm_proc, proc_ops, data);
+ 	if (kpep->kpe_proc == NULL) {
+ 		list_del_init(&kpep->kpe_list);
+ 		if (list_empty(&module->ksm_kstat_list))
+diff --git a/module/os/linux/spl/spl-proc.c b/module/os/linux/spl/spl-proc.c
+index 45bc7f963..f68f9b522 100644
+--- a/module/os/linux/spl/spl-proc.c
++++ b/module/os/linux/spl/spl-proc.c
+@@ -532,11 +532,18 @@ proc_slab_open(struct inode *inode, struct file *filp)
+ 	return (seq_open(filp, &slab_seq_ops));
+ }
+ 
+-static struct file_operations proc_slab_operations = {
+-	.open	   = proc_slab_open,
+-	.read	   = seq_read,
+-	.llseek	 = seq_lseek,
++static const kstat_proc_op_t proc_slab_operations = {
++#ifdef HAVE_PROC_OPS_STRUCT
++	.proc_open	= proc_slab_open,
++	.proc_read	= seq_read,
++	.proc_lseek	= seq_lseek,
++	.proc_release	= seq_release,
++#else
++	.open		= proc_slab_open,
++	.read		= seq_read,
++	.llseek		= seq_lseek,
+ 	.release	= seq_release,
++#endif
+ };
+ 
+ static void
+@@ -571,18 +578,32 @@ proc_taskq_open(struct inode *inode, struct file *filp)
+ 	return (seq_open(filp, &taskq_seq_ops));
+ }
+ 
+-static struct file_operations proc_taskq_all_operations = {
++static const kstat_proc_op_t proc_taskq_all_operations = {
++#ifdef HAVE_PROC_OPS_STRUCT
++	.proc_open	= proc_taskq_all_open,
++	.proc_read	= seq_read,
++	.proc_lseek	= seq_lseek,
++	.proc_release	= seq_release,
++#else
+ 	.open		= proc_taskq_all_open,
+ 	.read		= seq_read,
+ 	.llseek		= seq_lseek,
+ 	.release	= seq_release,
++#endif
+ };
+ 
+-static struct file_operations proc_taskq_operations = {
++static const kstat_proc_op_t proc_taskq_operations = {
++#ifdef HAVE_PROC_OPS_STRUCT
++	.proc_open	= proc_taskq_open,
++	.proc_read	= seq_read,
++	.proc_lseek	= seq_lseek,
++	.proc_release	= seq_release,
++#else
+ 	.open		= proc_taskq_open,
+ 	.read		= seq_read,
+ 	.llseek		= seq_lseek,
+ 	.release	= seq_release,
++#endif
+ };
+ 
+ static struct ctl_table spl_kmem_table[] = {
+diff --git a/module/os/linux/spl/spl-procfs-list.c b/module/os/linux/spl/spl-procfs-list.c
+index f6a00da5c..189d6a7c6 100644
+--- a/module/os/linux/spl/spl-procfs-list.c
++++ b/module/os/linux/spl/spl-procfs-list.c
+@@ -185,13 +185,20 @@ procfs_list_write(struct file *filp, const char __user *buf, size_t len,
+ 	return (len);
+ }
+ 
+-static struct file_operations procfs_list_operations = {
+-	.owner		= THIS_MODULE,
++static const kstat_proc_op_t procfs_list_operations = {
++#ifdef HAVE_PROC_OPS_STRUCT
++	.proc_open	= procfs_list_open,
++	.proc_write	= procfs_list_write,
++	.proc_read	= seq_read,
++	.proc_lseek	= seq_lseek,
++	.proc_release	= seq_release_private,
++#else
+ 	.open		= procfs_list_open,
+ 	.write		= procfs_list_write,
+ 	.read		= seq_read,
+ 	.llseek		= seq_lseek,
+ 	.release	= seq_release_private,
++#endif
+ };
+ 
+ /*
+diff --git a/module/os/linux/zfs/zfs_debug.c b/module/os/linux/zfs/zfs_debug.c
+index a64971d0a..d98463f1b 100644
+--- a/module/os/linux/zfs/zfs_debug.c
++++ b/module/os/linux/zfs/zfs_debug.c
+@@ -28,7 +28,7 @@
+ 
+ typedef struct zfs_dbgmsg {
+ 	procfs_list_node_t	zdm_node;
+-	time_t			zdm_timestamp;
++	uint64_t		zdm_timestamp;
+ 	int			zdm_size;
+ 	char			zdm_msg[1]; /* variable length allocation */
+ } zfs_dbgmsg_t;
+diff --git a/module/os/linux/zfs/zfs_vnops.c b/module/os/linux/zfs/zfs_vnops.c
+index ec63dbdeb..406cd7ef2 100644
+--- a/module/os/linux/zfs/zfs_vnops.c
++++ b/module/os/linux/zfs/zfs_vnops.c
+@@ -3444,8 +3444,8 @@ top:
+ 
+ 	if (mask & (ATTR_MTIME | ATTR_SIZE)) {
+ 		ZFS_TIME_ENCODE(&vap->va_mtime, mtime);
+-		ZTOI(zp)->i_mtime = zpl_inode_timespec_trunc(vap->va_mtime,
+-		    ZTOI(zp)->i_sb->s_time_gran);
++		ZTOI(zp)->i_mtime = zpl_inode_timestamp_truncate(
++		    vap->va_mtime, ZTOI(zp));
+ 
+ 		SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_MTIME(zfsvfs), NULL,
+ 		    mtime, sizeof (mtime));
+@@ -3453,8 +3453,8 @@ top:
+ 
+ 	if (mask & (ATTR_CTIME | ATTR_SIZE)) {
+ 		ZFS_TIME_ENCODE(&vap->va_ctime, ctime);
+-		ZTOI(zp)->i_ctime = zpl_inode_timespec_trunc(vap->va_ctime,
+-		    ZTOI(zp)->i_sb->s_time_gran);
++		ZTOI(zp)->i_ctime = zpl_inode_timestamp_truncate(vap->va_ctime,
++		    ZTOI(zp));
+ 		SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_CTIME(zfsvfs), NULL,
+ 		    ctime, sizeof (ctime));
+ 	}
+diff --git a/module/os/linux/zfs/zpl_inode.c b/module/os/linux/zfs/zpl_inode.c
+index e1c6ce7b7..c1b582574 100644
+--- a/module/os/linux/zfs/zpl_inode.c
++++ b/module/os/linux/zfs/zpl_inode.c
+@@ -382,10 +382,8 @@ zpl_setattr(struct dentry *dentry, struct iattr *ia)
+ 	vap->va_mtime = ia->ia_mtime;
+ 	vap->va_ctime = ia->ia_ctime;
+ 
+-	if (vap->va_mask & ATTR_ATIME) {
+-		ip->i_atime = zpl_inode_timespec_trunc(ia->ia_atime,
+-		    ip->i_sb->s_time_gran);
+-	}
++	if (vap->va_mask & ATTR_ATIME)
++		ip->i_atime = zpl_inode_timestamp_truncate(ia->ia_atime, ip);
+ 
+ 	cookie = spl_fstrans_mark();
+ 	error = -zfs_setattr(ITOZ(ip), vap, 0, cr);
+diff --git a/module/zfs/vdev_initialize.c b/module/zfs/vdev_initialize.c
+index 3e691c7f5..5899af9fc 100644
+--- a/module/zfs/vdev_initialize.c
++++ b/module/zfs/vdev_initialize.c
+@@ -713,7 +713,7 @@ vdev_initialize_restart(vdev_t *vd)
+ 		    vd->vdev_leaf_zap, VDEV_LEAF_ZAP_INITIALIZE_ACTION_TIME,
+ 		    sizeof (timestamp), 1, &timestamp);
+ 		ASSERT(err == 0 || err == ENOENT);
+-		vd->vdev_initialize_action_time = (time_t)timestamp;
++		vd->vdev_initialize_action_time = timestamp;
+ 
+ 		if (vd->vdev_initialize_state == VDEV_INITIALIZE_SUSPENDED ||
+ 		    vd->vdev_offline) {
+diff --git a/module/zfs/vdev_trim.c b/module/zfs/vdev_trim.c
+index c7c429cbd..7dec07e3c 100644
+--- a/module/zfs/vdev_trim.c
++++ b/module/zfs/vdev_trim.c
+@@ -1051,7 +1051,7 @@ vdev_trim_restart(vdev_t *vd)
+ 		    vd->vdev_leaf_zap, VDEV_LEAF_ZAP_TRIM_ACTION_TIME,
+ 		    sizeof (timestamp), 1, &timestamp);
+ 		ASSERT(err == 0 || err == ENOENT);
+-		vd->vdev_trim_action_time = (time_t)timestamp;
++		vd->vdev_trim_action_time = timestamp;
+ 
+ 		if (vd->vdev_trim_state == VDEV_TRIM_SUSPENDED ||
+ 		    vd->vdev_offline) {
