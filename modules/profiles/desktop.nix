@@ -37,4 +37,9 @@
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+
+  #services.nhi-icc.enable = true;
+  #nixpkgs.config.permittedInsecurePackages = [
+  #  "openssl-1.0.2u"
+  #];
 }

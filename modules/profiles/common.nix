@@ -1,7 +1,10 @@
 { options, pkgs, ... }:
 
 {
-  imports = [ ./services/logrotate.nix ];
+  imports = [
+    ../services/nhi-icc.nix
+    ./services/logrotate.nix
+  ];
 
   environment.systemPackages = with pkgs; [
     htop
