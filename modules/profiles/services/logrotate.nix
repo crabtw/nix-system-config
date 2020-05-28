@@ -1,7 +1,7 @@
 {
   services.logrotate = {
     enable = true;
-    config = ''
+    extraConfig = ''
       weekly
       rotate 4
       create
