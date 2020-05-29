@@ -4,7 +4,7 @@ let
 
   inherit (super) lib;
 
-  version = "0.8.3";
+  version = "0.8.4";
 
   newVer = old: {
     name = lib.replaceStrings [ version ] [ "2020-01-31" ] old.name;
