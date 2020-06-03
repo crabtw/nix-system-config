@@ -6,7 +6,10 @@
     ./services/logrotate.nix
   ];
 
+  documentation.dev.enable = true;
+
   environment.systemPackages = with pkgs; [
+    man-pages
     htop
     file
     git
