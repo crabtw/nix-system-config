@@ -22,17 +22,26 @@
     keyMode = "vi";
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
 
-  nixpkgs.overlays = [
-    (import ../../overlays/local.nix)
-  ];
+    overlays = [
+      (import ../../overlays/local.nix)
+    ];
+  };
 }
