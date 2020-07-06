@@ -8,6 +8,7 @@
     permitRootLogin = "no";
     challengeResponseAuthentication = false;
     passwordAuthentication = false;
+    ports = [ 22 443 ];
   };
 
   services.sshguard.enable = true;
