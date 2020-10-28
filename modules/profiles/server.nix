@@ -1,7 +1,9 @@
-{ ... }:
+{ home-manager }:
 
 {
-  imports = [ ./common.nix ];
+  imports = [
+    (import ./common.nix { inherit home-manager; })
+  ];
 
   services.openssh = {
     enable = true;

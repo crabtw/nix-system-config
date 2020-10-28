@@ -1,9 +1,9 @@
-nixpkgs:
+{ nixpkgs, home-manager }:
 
 {
   imports = [
     "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
     ./system/linode-lish.nix
-    ./server.nix
+    (import ./server.nix { inherit home-manager; })
   ];
 }

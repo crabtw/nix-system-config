@@ -1,10 +1,14 @@
-{ options, pkgs, ... }:
+{ home-manager }: { options, pkgs, ... }:
 
 {
   imports = [
+    home-manager.nixosModules.home-manager
     ../services/nhi-icc.nix
     ./services/logrotate.nix
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
 
   documentation.dev.enable = true;
 

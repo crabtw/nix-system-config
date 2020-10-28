@@ -7,6 +7,8 @@
     ./programs/direnv
   ];
 
+  home.stateVersion = "20.09";
+
   home.packages = with pkgs; [
     # utils
     file

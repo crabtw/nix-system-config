@@ -1,10 +1,9 @@
-sops-nix: { pkgs, ... }:
+{ sops-nix, home-manager }: { pkgs, ... }:
 
 {
   imports = [
     sops-nix.nixosModules.sops
-    ./services/pppd.nix
-    ./common.nix
+    (import ./common.nix { inherit home-manager; })
     ./fonts/fontconfig
   ];
 
