@@ -1,13 +1,42 @@
-self: super:
+final: prev:
 
-{
-  wqy_unibit = super.callPackage ../pkgs/wqy-unibit.nix {};
+let
 
-  opendesktop-fonts = super.callPackage ../pkgs/opendesktop-fonts.nix {};
+  pkgs = prev.pkgs;
 
-  ipamonafont = super.callPackage ../pkgs/ipamonafont.nix {};
+  lib = prev.lib;
 
-  noto-fonts-serif-cjk = super.callPackage ../pkgs/noto-fonts-serif-cjk.nix {};
+in {
+  wqy_unibit = prev.callPackage ../pkgs/wqy-unibit.nix {};
 
-  nhi-icc = super.callPackage ../pkgs/nhi-icc.nix {};
+  opendesktop-fonts = prev.callPackage ../pkgs/opendesktop-fonts.nix {};
+
+  ipamonafont = prev.callPackage ../pkgs/ipamonafont.nix {};
+
+  noto-fonts-serif-cjk = prev.callPackage ../pkgs/noto-fonts-serif-cjk.nix {};
+
+  nhi-icc = prev.callPackage ../pkgs/nhi-icc.nix {};
+
+  haskellPackages = prev.haskellPackages.override {
+    overrides = final: prev: import ../pkgs/haskell-packages.nix {
+      pkgs = pkgs;
+      stdenv = pkgs.stdenv;
+      callPackage = final.callPackage;
+      hsPkgs = prev;
+    };
+  };
+
+  vimPlugins = prev.vimPlugins // (
+    let
+      inherit (prev) vim;
+      inherit (prev.vimUtils.override {inherit vim;}) buildVimPluginFrom2Nix;
+    in
+      {
+        my-vim = prev.callPackage ../pkgs/my-vim-plugin.nix {
+          inherit buildVimPluginFrom2Nix;
+        };
+      }
+  );
+
+  vmware-horizon-client = prev.callPackage ../pkgs/vmware-horizon-client.nix {};
 }

@@ -1,12 +1,4 @@
-{ lib, ... }:
-
-let
-
-  secrets = lib.readFile ./pap-secrets;
-
-  name = lib.head (lib.remove "" (lib.splitString " " secrets));
-
-in
+{ config, ... }:
 
 {
   services.pppd = {
@@ -26,12 +18,11 @@ in
 
       +ipv6
 
-      name "${name}"
+      file ${config.sops.secrets.pppd-secret-options.path}
     '';
   };
 
-  environment.etc."ppp/pap-secrets" = {
-    text = secrets;
-    mode = "0600";
-  };
+  sops.secrets.pppd-secret-options = {};
+
+  sops.secrets.pap-secrets.path = "/etc/ppp/pap-secrets";
 }

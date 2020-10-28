@@ -1,12 +1,17 @@
-{ pkgs, ... }:
+sops-nix: { pkgs, ... }:
 
 {
   imports = [
+    sops-nix.nixosModules.sops
+    ./services/pppd.nix
     ./common.nix
     ./fonts/fontconfig
   ];
 
+  sops.defaultSopsFile = ./secrets/desktop.yaml;
+
   environment.systemPackages = with pkgs; [
+    pavucontrol
     libva-utils
   ];
 
@@ -17,7 +22,12 @@
     ];
   };
 
-  services.openssh.enable = false;
+  services.openssh = {
+    enable = true;
+    listenAddresses = [
+      { addr = "127.0.0.1"; port = 22; }
+    ];
+  };
 
   services.xserver = {
     enable = true;

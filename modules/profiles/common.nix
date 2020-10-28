@@ -23,6 +23,8 @@
   };
 
   nix = {
+    package = pkgs.nixUnstable;
+
     gc = {
       automatic = true;
       dates = "weekly";
@@ -30,6 +32,7 @@
     };
 
     extraOptions = ''
+      experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
     '';
