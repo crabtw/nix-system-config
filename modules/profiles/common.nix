@@ -1,4 +1,4 @@
-{ home-manager }: { options, pkgs, ... }:
+{ nixpkgs, home-manager, ... }: { options, pkgs, ... }:
 
 {
   imports = [
@@ -40,6 +40,11 @@
       keep-outputs = true
       keep-derivations = true
     '';
+
+    registry = {
+      nixpkgs.flake = nixpkgs;
+      home-manager.flake = home-manager;
+    };
   };
 
   nixpkgs = {

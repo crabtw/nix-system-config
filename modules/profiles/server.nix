@@ -1,8 +1,8 @@
-{ home-manager }:
+inputs:
 
 {
   imports = [
-    (import ./common.nix { inherit home-manager; })
+    (import ./common.nix inputs)
   ];
 
   services.openssh = {

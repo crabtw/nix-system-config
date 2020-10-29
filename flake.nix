@@ -6,22 +6,25 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, sops-nix, home-manager }: {
+  outputs = { self, nixpkgs, sops-nix, home-manager }@inputs: {
     nixosModules = {
-      desktop = import ./modules/profiles/desktop.nix {
-        inherit sops-nix home-manager;
+      desktop = import ./modules/profiles/desktop.nix inputs;
+
+      desktop-home = {
+        imports = [
+          (import ./modules/profiles/desktop.nix inputs)
+          ./modules/profiles/services/pppd.nix
+        ];
       };
 
-      desktop-home = import ./modules/profiles/desktop-home.nix {
-        inherit sops-nix home-manager;
-      };
+      server = import ./modules/profiles/server.nix inputs;
 
-      server = import ./modules/profiles/server.nix {
-        inherit home-manager;
-      };
-
-      server-linode = import ./modules/profiles/server-linode.nix {
-        inherit nixpkgs home-manager;
+      server-linode = {
+        imports = [
+          (import ./modules/profiles/server.nix inputs)
+          "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
+          ./modules/profiles/system/linode-lish.nix
+        ];
       };
 
       home-desktop = import ./home/modules/profiles/desktop.nix;
