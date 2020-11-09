@@ -46,8 +46,8 @@ in
       src = fetchFromGitHub {
         owner = "crabtw";
         repo = "gipeda";
-        rev = "5bf3d0552bcb7679b24def343d1fc18a5747c5c0";
-        sha256 = "0rqx3lfv3bqd2y4ngq41bdkfzad27j52b0wp2n5xg7a7ya9k95la";
+        rev = "c4c4f9dabcf7e366bdaa67071423921dd981e0bb";
+        sha256 = "1rzv96g56vljbfj5fv44rw67m5avwg39v0pp049hmj3php6f1knh";
       };
       buildTools = [ makeWrapper ];
       postPatch = ''
