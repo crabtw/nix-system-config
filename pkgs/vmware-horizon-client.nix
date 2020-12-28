@@ -27,8 +27,8 @@ let
 
   vmwareBundleUnpacker = fetchurl {
     url =
-      "https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/eclass/vmware-bundle.eclass";
-    sha256 = "0qsiaps2ifwnnbh3ighrbc3hx25knavhhndfimlypzcs48i4qyfq";
+      "https://sources.gentoo.org/proj/vmware.git/plain/eclass/vmware-bundle.eclass";
+    sha256 = "0crh8c6mx385pr4dz2z6gx5zgyd3gjj185z8r1pm1z4ip293x1nn";
   };
 
   vmwareBundle = if stdenv.hostPlatform.system == "x86_64-linux" then
