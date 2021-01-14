@@ -3,13 +3,13 @@
 
 let
 
-  version = "2006";
+  version = "2012";
 
-  build1 = "8.0.0";
+  build1 = "8.1.0";
 
-  build2 = "16522670";
+  build2 = "17349998";
 
-  cart = "CART21FQ2";
+  cart = "CART21FQ4";
 
   meta = {
     license = stdenv.lib.licenses.unfree;
@@ -22,7 +22,7 @@ let
   vmwareBundle64 = fetchurl {
     url =
       "https://download3.vmware.com/software/view/viewclients/${cart}/VMware-Horizon-Client-${version}-${build1}-${build2}.x64.bundle";
-    sha256 = "1kawm6wwjaajrvmi0wg5wlgjcsmc1x28s40h3715cs9i800kkakp";
+    sha256 = "1nmp2hplvh7dpcyra9yp62x55vghjzixxka1fb2xgdfgha2b975q";
   };
 
   vmwareBundleUnpacker = fetchurl {
@@ -59,7 +59,7 @@ let
         export T="$PWD"
         vmware-bundle_extract-bundle-component "$src" vmware-horizon-client ./ext-client
         vmware-bundle_extract-bundle-component "$src" vmware-horizon-pcoip ./ext-pcoip
-        vmware-bundle_extract-bundle-component "$src" vmware-horizon-seamless-window ./ext-seamless
+        vmware-bundle_extract-bundle-component "$src" vmware-horizon-hosted-apps ./ext-apps
       ' >extractor.sh
       bash extractor.sh
     '';
@@ -70,8 +70,8 @@ let
       cp -a ./ext-client/bin "$out/"
       cp -a ./ext-client/lib "$out/"
       cp -a ./ext-client/share "$out/"
-      cp -a ./ext-pcoip/pcoip/lib "$out/"
-      cp -a ./ext-seamless/lib "$out/"
+      cp -a ./ext-pcoip/lib "$out/"
+      cp -a ./ext-apps/lib "$out/"
 
       for FILE in $(find "$out" -type f); do
         file --mime "$FILE" | egrep -q "(application/x-(pie-)?(executable|sharedlib)|text/x-shellscript)" || continue
