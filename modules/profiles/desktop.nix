@@ -34,7 +34,7 @@
     videoDrivers = [ "intel" ];
     libinput = {
       enable = true;
-      leftHanded = true;
+      mouse.leftHanded = true;
     };
     displayManager.startx.enable = true;
   };
