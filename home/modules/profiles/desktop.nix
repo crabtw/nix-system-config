@@ -14,6 +14,7 @@
     pcmanx-gtk2
     xorg.xdpyinfo
     vmware-horizon-client
+    citrix_workspace
 
     # utils
     cmus
