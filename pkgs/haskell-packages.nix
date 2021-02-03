@@ -28,7 +28,7 @@ in
         transformers
       ];
       description = "A HTML scraper for wawabook.com.tw";
-      license = stdenv.lib.licenses.asl20;
+      license = pkgs.lib.licenses.asl20;
     }
   ) {};
 
@@ -69,7 +69,7 @@ in
       ];
       homepage = "https://github.com/nomeata/gipeda";
       description = "Git Performance Dashboard";
-      license = stdenv.lib.licenses.mit;
+      license = pkgs.lib.licenses.mit;
     }
   ) {
     inherit (pkgs.lib) makeBinPath;
