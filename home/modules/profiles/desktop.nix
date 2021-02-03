@@ -44,7 +44,7 @@
     scroll.bar.enable = false;
     iso14755 = false;
     fonts = [
-      "xft:Inconsolata:pixelsize=17"
+      "xft:Inconsolata Nerd Font Mono:pixelsize=17"
       "xft:AR PL New Sung Mono:pixelsize=16"
       "xft:IPAexGothic:pixelsize=16"
       "xft:DejaVu Sans Mono:pixelsize=16"
