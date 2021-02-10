@@ -37,6 +37,4 @@ in {
         };
       }
   );
-
-  vmware-horizon-client = prev.callPackage ../pkgs/vmware-horizon-client.nix {};
 }
