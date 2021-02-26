@@ -7,7 +7,7 @@
     ./programs/direnv
   ];
 
-  home.stateVersion = "21.03";
+  home.stateVersion = "21.05";
 
   home.packages = with pkgs; [
     # utils
