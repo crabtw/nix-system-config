@@ -20,7 +20,6 @@
   programs.tmux.extraConfig =  ''
     new  -n irc
     neww -n wawabook -c ~/db/wawabook
-    neww -n nix-home-config -c ~/src/nix-home-config
     neww -n nix-system-config -c ~/src/nix-system-config
     neww -n nixpkgs -c ~/src/nixpkgs
     neww -n ats-xanadu -c ~/src/ATS-Xanadu/
@@ -37,6 +36,7 @@
     neww -n sail -c ~/src/sail
     neww -n grin -c ~/src/grin
     neww -n regalloc.rs -c ~/src/regalloc.rs
+    neww -n zig -c ~/src/zig
 
     neww -c ~/
     selectw -t 0
