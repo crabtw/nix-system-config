@@ -30,11 +30,6 @@
 
   programs.firefox = {
     enable = true;
-    profiles.default.settings = {
-      "browser.tabs.insertRelatedAfterCurrent" = false;
-      "browser.link.open_newwindow.restriction" = 0;
-      "security.certerrors.mitm.auto_enable_enterprise_roots" = false;
-    };
   };
 
   programs.chromium.enable = true;
