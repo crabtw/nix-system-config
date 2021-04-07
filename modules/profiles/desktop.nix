@@ -31,7 +31,6 @@
   services.xserver = {
     enable = true;
     autorun = false;
-    videoDrivers = [ "intel" ];
     libinput = {
       enable = true;
       mouse.leftHanded = true;
