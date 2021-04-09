@@ -80,13 +80,7 @@ in
     gitBin = pkgs.git;
   };
 
-  gitlib = overrideCabal hsPkgs.gitlib (drv: {
-    postPatch = ''
-      substituteInPlace ./Git/Types.hs \
-        --replace "textToSha :: Monad" "textToSha :: MonadFail"
-    '';
-    broken = false;
-  });
+  gitlib = unmarkBroken hsPkgs.gitlib;
 
   gitlib-libgit2 = unmarkBroken hsPkgs.gitlib-libgit2;
 
