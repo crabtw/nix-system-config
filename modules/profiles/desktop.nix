@@ -12,6 +12,8 @@
   environment.systemPackages = with pkgs; [
     pavucontrol
     libva-utils
+    gptfdisk
+    smartmontools
   ];
 
   hardware.opengl = {
