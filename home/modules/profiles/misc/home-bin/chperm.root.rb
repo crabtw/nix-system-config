@@ -5,9 +5,9 @@ require 'pathname'
 
 def chperm dir
   if dir.directory?
+    FileUtils.chmod 0755, dir
     dir.each_child do |path|
       if path.directory?
-        FileUtils.chmod 0755, path
         chperm path
       else
         FileUtils.chmod 0644, path
