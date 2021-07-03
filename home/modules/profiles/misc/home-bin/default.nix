@@ -34,38 +34,10 @@
       --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby"
   '';
 
-  home.file."bin/comicdb".source =
-    let
-      ruby = pkgs.ruby.withPackages (pkgs: [ pkgs.sqlite3 ]);
-    in
-      pkgs.runCommandLocal "home-bin-comicdb.rb" {} ''
-        install -m755 ${./comicdb.rb} $out
+  home.file."bin/comicdb".source = pkgs.runCommandLocal "home-bin-comicdb.rb" {} ''
+    install -m755 ${./comicdb.rb} $out
 
-        substituteInPlace $out \
-          --replace "/usr/bin/env ruby" "${ruby}/bin/ruby"
-      '';
-
-  home.file."bin/comicdb-sh" = {
-    executable = true;
-    text = ''
-      #!${pkgs.runtimeShell}
-
-      while true; do
-          printf ">> "
-          if read x; then
-              true
-          else
-              exit
-          fi
-
-          x=`echo $x | sed -r 's/^\s+|\s+$//'`
-
-          if [[ -z "$x" ]]; then
-              continue
-          fi
-
-          comicdb "$x"
-      done
-    '';
-  };
+    substituteInPlace $out \
+      --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby"
+  '';
 }
