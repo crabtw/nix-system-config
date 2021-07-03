@@ -25,7 +25,7 @@
     abcde
     unrar
     p7zip
-    tmsu
+    supertag
     lm_sensors
   ];
 
