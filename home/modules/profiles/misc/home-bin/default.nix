@@ -33,11 +33,4 @@
     substituteInPlace $out \
       --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby"
   '';
-
-  home.file."bin/comicdb".source = pkgs.runCommandLocal "home-bin-comicdb.rb" {} ''
-    install -m755 ${./comicdb.rb} $out
-
-    substituteInPlace $out \
-      --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby"
-  '';
 }
