@@ -27,8 +27,8 @@
       --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby"
   '';
 
-  home.file."bin/chperm.root".source = pkgs.runCommandLocal "home-bin-chperm.root.rb" {} ''
-    install -m755 ${./chperm.root.rb} $out
+  home.file."bin/chperm.backup".source = pkgs.runCommandLocal "home-bin-chperm.backup.rb" {} ''
+    install -m755 ${./chperm.backup.rb} $out
 
     substituteInPlace $out \
       --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby"
