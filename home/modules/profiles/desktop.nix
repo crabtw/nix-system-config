@@ -25,13 +25,8 @@
     abcde
     unrar
     p7zip
-    tmsu
     lm_sensors
   ];
-
-  programs.bash.shellAliases = {
-    "tmsu.comic" = "tmsu --database=$HOME/db/.tmsu/comic.db";
-  };
 
   programs.firefox = {
     enable = true;
