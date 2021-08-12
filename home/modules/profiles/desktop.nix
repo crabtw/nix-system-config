@@ -11,7 +11,6 @@
   home.packages = with pkgs; [
     # X11
     xsel
-    pcmanx-gtk2
     xorg.xdpyinfo
     vmware-horizon-client
     citrix_workspace
