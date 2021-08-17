@@ -8,7 +8,7 @@
 
       updetach
       plugin rp-pppoe.so
-      nic-enp3s0
+      nic-enp42s0
 
       noauth
       defaultroute
