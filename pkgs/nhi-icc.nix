@@ -32,7 +32,7 @@ let
   };
 
   openssl_1_0_2_verSymPatch = fetchurl {
-    url = "https://git.archlinux.org/svntogit/packages.git/plain/trunk/openssl-1.0-versioned-symbols.patch?h=packages/openssl-1.0";
+    url = "https://github.com/archlinux/svntogit-packages/raw/packages/openssl-1.0/trunk/openssl-1.0-versioned-symbols.patch";
     sha256 = "19nakabjbj689aw1wml3clwp3hmriy7nn8frxdww6difr7j88fim";
   };
 
