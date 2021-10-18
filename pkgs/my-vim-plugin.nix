@@ -6,7 +6,7 @@ buildVimPluginFrom2Nix {
   src = fetchFromGitHub {
     owner = "crabtw";
     repo = "my.vim";
-    rev = "8537b47e55af440e0110abfefa4d632afc74c59b";
-    sha256 = "01xp98752489j5v8dakd32kfp8v86bnw1s1rgwj312fqn7vjd3ic";
+    rev = "fa2f719f3d4abdcd1606096d22eef801227ee047";
+    sha256 = "1f72yxy5x8s2kaxgq68b60wk5x86kqaxl3jxddrix5y87z6zxqn6";
   };
 }
