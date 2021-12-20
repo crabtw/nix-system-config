@@ -15,6 +15,7 @@
     vmware-horizon-client
     citrix_workspace
     teams
+    wezterm
 
     # utils
     cmus
