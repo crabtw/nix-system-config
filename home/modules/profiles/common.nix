@@ -70,7 +70,7 @@
     enable = true;
     keyMode = "vi";
     terminal = "screen-256color";
-    historyLimit = 10000;
+    historyLimit = 50000;
   };
 
   programs.vim = {
