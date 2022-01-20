@@ -80,6 +80,7 @@
       rust-vim
       vim-nix
       zig-vim
+      idris2-vim
     ];
     extraConfig = ''
       set nocompatible
