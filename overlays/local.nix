@@ -13,8 +13,6 @@ in {
 
   ipamonafont = prev.callPackage ../pkgs/ipamonafont.nix {};
 
-  noto-fonts-serif-cjk = prev.callPackage ../pkgs/noto-fonts-serif-cjk.nix {};
-
   nhi-icc = prev.callPackage ../pkgs/nhi-icc.nix {};
 
   haskellPackages = prev.haskellPackages.override {
