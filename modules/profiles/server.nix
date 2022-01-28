@@ -8,7 +8,7 @@ inputs:
   services.openssh = {
     enable = true;
     permitRootLogin = "no";
-    challengeResponseAuthentication = false;
+    kbdInteractiveAuthentication = false;
     passwordAuthentication = false;
     ports = [ 22 443 ];
   };
