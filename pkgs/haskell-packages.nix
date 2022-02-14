@@ -79,10 +79,4 @@ in
     unzipBin = pkgs.unzip;
     gitBin = pkgs.git;
   };
-
-  gitlib = unmarkBroken hsPkgs.gitlib;
-
-  gitlib-libgit2 = unmarkBroken hsPkgs.gitlib-libgit2;
-
-  gitlib-test = unmarkBroken hsPkgs.gitlib-test;
 }
