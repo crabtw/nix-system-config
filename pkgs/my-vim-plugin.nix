@@ -2,11 +2,11 @@
 
 buildVimPluginFrom2Nix {
   pname = "my-vim";
-  version = "2021-03-22";
+  version = "2022-02-25";
   src = fetchFromGitHub {
     owner = "crabtw";
     repo = "my.vim";
-    rev = "fa2f719f3d4abdcd1606096d22eef801227ee047";
-    sha256 = "1f72yxy5x8s2kaxgq68b60wk5x86kqaxl3jxddrix5y87z6zxqn6";
+    rev = "9b7817739ccc34d04a79b43d5be9aa182e1c49db";
+    sha256 = "1z2mgabnazv1v69kry68qf7hd49wcgs24biraf3j9v77zbhah7y8";
   };
 }
