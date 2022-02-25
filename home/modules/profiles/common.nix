@@ -81,6 +81,7 @@
       vim-nix
       zig-vim
       idris2-vim
+      vim-racket
     ];
     extraConfig = ''
       set nocompatible
