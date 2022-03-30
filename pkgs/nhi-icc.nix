@@ -36,7 +36,7 @@ let
     sha256 = "19nakabjbj689aw1wml3clwp3hmriy7nn8frxdww6difr7j88fim";
   };
 
-  openssl_1_0_2_verSym = openssl_1_0_2.overrideAttrs (old: old // {
+  openssl_1_0_2_verSym = openssl_1_0_2.overrideAttrs (old: {
     patches = old.patches ++ [ openssl_1_0_2_verSymPatch ];
   });
 
