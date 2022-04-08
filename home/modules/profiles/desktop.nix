@@ -19,7 +19,6 @@
 
     # utils
     cmus
-    llpp
     imagemagick
     ffmpeg
     abcde
@@ -28,11 +27,11 @@
     lm_sensors
   ];
 
-  programs.firefox = {
-    enable = true;
-  };
+  programs.firefox.enable = true;
 
   programs.chromium.enable = true;
+
+  programs.zathura.enable = true;
 
   programs.urxvt = {
     enable = true;
