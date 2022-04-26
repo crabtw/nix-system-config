@@ -19,6 +19,7 @@
     fd
     ripgrep
     inetutils
+    dnsutils
     gnupg
 
     # dev
