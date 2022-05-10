@@ -13,8 +13,6 @@
     xsel
     xorg.xdpyinfo
     vmware-horizon-client
-    citrix_workspace
-    teams
     wezterm
 
     # utils
