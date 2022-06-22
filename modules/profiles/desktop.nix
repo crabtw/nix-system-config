@@ -35,7 +35,7 @@
     autorun = false;
     libinput = {
       enable = true;
-      mouse.leftHanded = true;
+      mouse.leftHanded = false;
     };
     displayManager.startx.enable = true;
   };
