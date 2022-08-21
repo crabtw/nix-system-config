@@ -35,4 +35,25 @@ in {
         };
       }
   );
+
+  zathura =
+    let
+
+      zathuraPkgs = prev.zathuraPkgs;
+
+      zathura_pdf_mupdf = zathuraPkgs.zathura_pdf_mupdf.overrideAttrs(old: {
+        patches = [
+          ./zathura-fix-fz_search_stext_page.patch
+        ];
+      });
+
+    in prev.zathura.override {
+      plugins = with zathuraPkgs; [
+        zathura_djvu
+        zathura_ps
+        zathura_cb
+      ] ++ [
+        zathura_pdf_mupdf
+      ];
+    };
 }
