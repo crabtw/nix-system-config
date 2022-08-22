@@ -42,7 +42,7 @@ in {
       zathuraPkgs = prev.zathuraPkgs;
 
       zathura_pdf_mupdf = zathuraPkgs.zathura_pdf_mupdf.overrideAttrs(old: {
-        patches = [
+        patches = assert old.version == "0.3.7"; [
           ./zathura-fix-fz_search_stext_page.patch
         ];
       });
