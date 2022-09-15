@@ -51,7 +51,7 @@
 
   programs.rtorrent = {
     enable = true;
-    settings =
+    extraConfig =
       let
         home = config.home.homeDirectory;
         downloadRate = 3000;
