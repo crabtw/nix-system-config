@@ -8,7 +8,7 @@
 
     substituteInPlace $out \
       --replace /bin/sh "${pkgs.runtimeShell}" \
-      --replace setsid "${pkgs.utillinux}/bin/setsid" \
+      --replace setsid "${pkgs.util-linux}/bin/setsid" \
       --replace dmenu "${pkgs.dmenu}/bin/dmenu"
   '';
 
