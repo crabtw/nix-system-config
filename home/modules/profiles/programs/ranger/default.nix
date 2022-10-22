@@ -19,7 +19,7 @@
     install -m644 ${pkgs.ranger}/share/doc/ranger/config/rifle.conf $out
 
     sed -E -i \
-      -e '/^mime[ ]+\^image,[ ]+has[ ]+feh,/ { s/feh( --)?/feh_rifle/g }' \
+      -e '/^mime[ ]+\^image,[ ]+has[ ]+imv,/ { s/imv( --)?/imv_rifle/g }' \
       -e 's/"\$PAGER"/\$PAGER/g' \
       $out
   '';
