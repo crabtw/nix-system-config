@@ -12,12 +12,12 @@
       --replace dmenu "${pkgs.dmenu}/bin/dmenu"
   '';
 
-  home.file."bin/imv_rifle".source = pkgs.runCommandLocal "home-bin-imv_rifle.rb" {} ''
-    install -m755 ${./imv_rifle.rb} $out
+  home.file."bin/feh_rifle".source = pkgs.runCommandLocal "home-bin-feh_rifle.rb" {} ''
+    install -m755 ${./feh_rifle.rb} $out
 
     substituteInPlace $out \
       --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby" \
-      --replace imv "${pkgs.imv}/bin/imv"
+      --replace feh "${pkgs.feh}/bin/feh"
   '';
 
   home.file."bin/seq-rename".source = pkgs.runCommandLocal "home-bin-seq-rename.rb" {} ''
