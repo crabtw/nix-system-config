@@ -13,9 +13,9 @@
 
   xdg.configFile."xmobar/xmobarrc".text = ''
     Config {
-        font = "xft:Unibit",
+        font = "DejaVu Sans Mono Bold 11",
         bgColor = "black",
-        fgColor = "grey",
+        fgColor = "light grey",
         position = TopW L 90,
         lowerOnStart = True,
         commands = [
