@@ -10,7 +10,7 @@ inputs:
     permitRootLogin = "no";
     kbdInteractiveAuthentication = false;
     passwordAuthentication = false;
-    ports = [ 22 443 ];
+    ports = [ 22 ];
   };
 
   services.sshguard.enable = true;
