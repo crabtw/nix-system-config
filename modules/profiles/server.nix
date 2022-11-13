@@ -14,4 +14,10 @@ inputs:
   };
 
   services.sshguard.enable = true;
+
+  services.wstunnel = {
+    enable = true;
+    listenAddress = "0.0.0.0:8080";
+    restrictTo = "127.0.0.1:22";
+  };
 }
