@@ -17,7 +17,9 @@ inputs:
 
   services.wstunnel = {
     enable = true;
-    listenAddress = "0.0.0.0:8080";
+    openFirewall = true;
+    bindAddress = "0.0.0.0";
+    port = 8080;
     restrictTo = "127.0.0.1:22";
   };
 }
