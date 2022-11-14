@@ -83,6 +83,9 @@ in
           RestrictSUIDSGID = true;
           RemoveIPC = true;
           PrivateMounts = true;
+          # System Call Filtering
+          SystemCallArchitectures = "native";
+          SystemCallFilter = [ "@system-service" ];
         };
     };
   };
