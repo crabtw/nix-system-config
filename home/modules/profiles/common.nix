@@ -58,7 +58,13 @@
     extraConfig = {
       pull.rebase = false;
     };
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options = {
+        dark = true;
+        line-numbers = true;
+      };
+    };
   };
 
   programs.mercurial = with config.accounts.email.accounts; {
