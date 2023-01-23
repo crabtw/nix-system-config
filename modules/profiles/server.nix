@@ -7,10 +7,12 @@ inputs:
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
-    kbdInteractiveAuthentication = false;
-    passwordAuthentication = false;
     ports = [ 22 ];
+    settings = {
+      PermitRootLogin = "no";
+      KbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+    };
   };
 
   services.sshguard.enable = true;
