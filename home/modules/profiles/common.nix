@@ -24,7 +24,6 @@
 
     # dev
     tig
-    subversion
     ruby
     shellcheck
     niv
