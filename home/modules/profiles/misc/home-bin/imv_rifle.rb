@@ -38,5 +38,5 @@ if __FILE__ == $0
     f =~ /\.(jpe?g|png|bmp|gif)$/i
   end.sort_by {|f| nat_ord f}
 
-  exec 'imv', '-n', file, '-f', *all
+  exec 'imv', '-n', file, '-f', '-s', 'shrink', *all
 end
