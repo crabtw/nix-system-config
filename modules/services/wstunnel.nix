@@ -31,6 +31,21 @@ in
       type = types.nullOr types.str;
       default = "127.0.0.1:22";
     };
+
+    sslCertificate = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+    };  
+
+    sslCertificateKey = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+    };  
+
+    extraGroups = mkOption {
+      type = types.listOf types.str;
+      default = [];
+    };
   };
 
   config = mkIf cfg.enable {
@@ -49,11 +64,14 @@ in
         in {
           ExecStart = "${pkgs.wstunnel}/bin/wstunnel"
             + " --server wss://${cfg.bindAddress}:${toString cfg.port}"
-            + optionalString (cfg.restrictTo != null) " -r ${cfg.restrictTo}";
+            + optionalString (cfg.restrictTo != null) " -r ${cfg.restrictTo}"
+            + optionalString (cfg.sslCertificate != null) " --tlsCertificate=${cfg.sslCertificate}"
+            + optionalString (cfg.sslCertificateKey != null) " --tlsKey=${cfg.sslCertificateKey}";
           Restart = "always";
           RestartSec = "10s";
           # User and group
           DynamicUser = true;
+          SupplementaryGroups = cfg.extraGroups;
           # Proc filesystem
           ProcSubset = "pid";
           ProtectProc = "invisible";
