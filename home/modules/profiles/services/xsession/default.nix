@@ -43,7 +43,7 @@
     systemctl --user import-environment DISPLAY XAUTHORITY
     systemctl --user start graphical-session.target
 
-    fcitx -d -r
+    fcitx5 -d -r
 
     # common
     ${pkgs.xorg.xrdb}/bin/xrdb -merge $HOME/.Xresources

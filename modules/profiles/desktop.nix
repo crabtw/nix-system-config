@@ -41,8 +41,8 @@
   };
 
   i18n.inputMethod = {
-    enabled = "fcitx";
-    fcitx.engines = [ pkgs.fcitx-engines.chewing ];
+    enabled = "fcitx5";
+    fcitx5.addons = [ pkgs.fcitx5-chewing ];
   };
 
   sound.enable = true;
