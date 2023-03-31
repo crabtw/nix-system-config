@@ -66,12 +66,6 @@
     };
   };
 
-  programs.mercurial = with config.accounts.email.accounts; {
-    enable = true;
-    userName = gmail.realName;
-    userEmail = gmail.address;
-  };
-
   programs.tmux = {
     enable = true;
     keyMode = "vi";
