@@ -4,12 +4,12 @@ with lib;
 
 let
 
-  cfg = config.services.wstunnel;
+  cfg = config.services.my-wstunnel;
 
 in
 
 {
-  options.services.wstunnel = {
+  options.services.my-wstunnel = {
     enable = mkEnableOption "wstunnel";
 
     bindAddress = mkOption {
