@@ -35,8 +35,4 @@ in {
         };
       }
   );
-
-  vmware-horizon-client = prev.vmware-horizon-client.override {
-    buildFHSEnv = prev.buildFHSEnvChroot;
-  };
 }
