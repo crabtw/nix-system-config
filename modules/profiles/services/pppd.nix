@@ -7,7 +7,7 @@
       linkname "ppp.float"
 
       updetach
-      plugin rp-pppoe.so
+      plugin pppoe.so
       nic-enp42s0
 
       noauth
