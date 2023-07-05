@@ -12,6 +12,12 @@
 
   documentation.dev.enable = true;
 
+  i18n.supportedLocales = [
+    "C.UTF-8/UTF-8"
+    "en_US.UTF-8/UTF-8"
+    "zh_TW.UTF-8/UTF-8"
+  ];
+
   environment.systemPackages = with pkgs; [
     man-pages
     htop
