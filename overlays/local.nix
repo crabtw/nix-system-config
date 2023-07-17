@@ -35,4 +35,8 @@ in {
         };
       }
   );
+
+  rtorrent = prev.rtorrent.overrideAttrs (finalAttrs: prevAttrs: {
+    hardeningDisable = [ "fortify3" ];
+  });
 }
