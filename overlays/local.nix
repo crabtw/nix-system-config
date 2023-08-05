@@ -35,13 +35,4 @@ in {
         };
       }
   );
-
-  rtorrent = prev.rtorrent.overrideAttrs (finalAttrs: prevAttrs: {
-    patches = [
-      (pkgs.fetchpatch {
-        url = "https://github.com/rakshasa/rtorrent/commit/92bec88d0904bfb31c808085c2fd0f22d0ec8db7.patch";
-        sha256 = "0hcrp81v4a124kaqrxail755yq502bknjqm4r7ipiiv8mlz89drw";
-      })
-    ];
-  });
 }
