@@ -43,5 +43,5 @@ main = do
         , modMask = mod4Mask
         , manageHook = myManageHook
         , handleEventHook = myHandleEventHook
-        , terminal = "urxvt"
+        , terminal = "wezterm"
         }

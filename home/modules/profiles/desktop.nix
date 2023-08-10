@@ -13,7 +13,6 @@
     xsel
     xorg.xdpyinfo
     vmware-horizon-client
-    wezterm
 
     # utils
     cmus
@@ -48,6 +47,40 @@
       "foreground" = "lightgray";
       "color12" = "#6464ff";
     };
+  };
+
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      local my_default = wezterm.color.get_default_colors()
+      my_default.foreground = "light grey"
+      my_default.brights[5] = "#6464ff"
+
+      return {
+          font = wezterm.font_with_fallback({
+              "Inconsolata Nerd Font Mono",
+              "Noto Sans CJK TC",
+              "Noto Sans CJK JP",
+              "Noto Sans CJK SC",
+              "AR PL New Sung Mono",
+              "IPAexGothic",
+              "DejaVu Sans Mono",
+              "FreeMono",
+          }),
+          font_size = 13.0,
+          harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
+
+          color_schemes = {
+              ["My Default"] = my_default,
+          },
+          color_scheme = "My Default",
+
+          enable_tab_bar = false,
+          scrollback_lines = 50000,
+
+          use_ime = true,
+      }
+    '';
   };
 
   programs.rtorrent = {
