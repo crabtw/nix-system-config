@@ -51,6 +51,7 @@
 
   programs.wezterm = {
     enable = true;
+    enableBashIntegration = true;
     extraConfig = ''
       local my_default = wezterm.color.get_default_colors()
       my_default.foreground = "light grey"
