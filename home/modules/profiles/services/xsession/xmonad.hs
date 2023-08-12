@@ -28,6 +28,7 @@ myKeys x = M.union (newKeys x) (keys def x)
     newKeys x = M.fromList
         [ ((modMask x, xK_f), sendMessage ToggleLayout)
         , ((modMask x, xK_p), spawn "dmenu_run")
+        , ((modMask x, xK_q), return ())
         ]
 
 myManageHook = manageHook def <+> manageDocks
