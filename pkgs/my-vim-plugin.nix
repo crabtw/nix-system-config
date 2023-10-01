@@ -1,6 +1,6 @@
-{ buildVimPluginFrom2Nix, fetchFromGitHub }:
+{ buildVimPlugin, fetchFromGitHub }:
 
-buildVimPluginFrom2Nix {
+buildVimPlugin {
   pname = "my-vim";
   version = "2022-08-08";
   src = fetchFromGitHub {

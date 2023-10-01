@@ -27,11 +27,11 @@ in {
   vimPlugins = prev.vimPlugins // (
     let
       inherit (prev) vim;
-      inherit (prev.vimUtils.override {inherit vim;}) buildVimPluginFrom2Nix;
+      inherit (prev.vimUtils.override {inherit vim;}) buildVimPlugin;
     in
       {
         my-vim = prev.callPackage ../pkgs/my-vim-plugin.nix {
-          inherit buildVimPluginFrom2Nix;
+          inherit buildVimPlugin;
         };
       }
   );
