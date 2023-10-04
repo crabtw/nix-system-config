@@ -33,7 +33,7 @@
   };
 
   nix = {
-    package = pkgs.nix;
+    package = pkgs.nixUnstable;
 
     gc = {
       automatic = true;
