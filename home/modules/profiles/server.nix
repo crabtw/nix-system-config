@@ -23,7 +23,7 @@
     neww -n wawabook -c ~/db/wawabook
     neww -n nix-system-config -c ~/src/nix-system-config
     neww -n nixpkgs -c ~/src/nixpkgs
-    neww -n ATS-Xanadu -c ~/src/ATS-Xanadu
+    neww -n nix -c ~/src/nix
     neww -n rust -c ~/src/rust
     neww -n ocaml -c ~/src/ocaml
     neww -n Idris2 -c ~/src/Idris2
