@@ -35,4 +35,11 @@ in {
         };
       }
   );
+
+  cmus = prev.cmus.overrideAttrs (_: prevAttrs: {
+    patches = prevAttrs.patches ++ [(prev.fetchpatch {
+      url = "https://github.com/cmus/cmus/commit/07ce2dc7082a1ed8704c21fd3f2877c8ba6b12f9.patch";
+      hash = "sha256-5gsz3q8R9FPobHoLj8BQPsa9s4ULEA9w2VQR+gmpmgA=";
+    })];
+  });
 }
