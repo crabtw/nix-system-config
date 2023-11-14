@@ -35,12 +35,4 @@ in {
         };
       }
   );
-
-  btrfs-progs = assert prev.btrfs-progs.version == "6.6"; prev.btrfs-progs.overrideAttrs (_: _: {
-    version = "6.5.3";
-    src = prev.fetchurl {
-      url = "mirror://kernel/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v6.5.3.tar.xz";
-      hash = "sha256-/OfLP5IOYV5j+vJlpM2fK/OdStyqZiEcmHaX2oWi7t0=";
-    };
-  });
 }
