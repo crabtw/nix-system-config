@@ -23,6 +23,7 @@
     htop
     file
     git
+    git-lfs
   ];
 
   programs.vim.defaultEditor = true;

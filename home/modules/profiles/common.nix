@@ -64,6 +64,7 @@
         line-numbers = true;
       };
     };
+    lfs.enable = true;
   };
 
   programs.tmux = {
