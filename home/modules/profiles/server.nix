@@ -7,7 +7,7 @@
 
   home.packages = with pkgs; [
     haskellPackages.wawabook
-    wstunnel
+    wstunnel-rs
   ];
 
   systemd.user.startServices = true;

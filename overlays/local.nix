@@ -35,4 +35,6 @@ in {
         };
       }
   );
+
+  wstunnel-rs = prev.callPackage ../pkgs/wstunnel-rs.nix {};
 }
