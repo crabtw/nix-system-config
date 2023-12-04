@@ -21,6 +21,7 @@
     inetutils
     dnsutils
     gnupg
+    jq
 
     # dev
     tig
