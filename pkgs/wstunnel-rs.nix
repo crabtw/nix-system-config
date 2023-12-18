@@ -2,7 +2,7 @@
 
 let
 
-  version = "8.0.0";
+  version = "8.3.0";
 
 in stdenv.mkDerivation {
   pname = "wstunnel-rs";
@@ -10,7 +10,7 @@ in stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/erebe/wstunnel/releases/download/v${version}/wstunnel_${version}_linux_amd64.tar.gz";
-    hash = "sha256-pxIGnzxxoxvrZDL5a4uSajvnsp9ZumwjOLAa97TPies=";
+    hash = "sha256-fNoU3AS7cx8JiA22MQydnU7pYXaTFifzIuxyXN5r0Ys=";
   };
 
   sourceRoot = ".";
