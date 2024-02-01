@@ -54,7 +54,6 @@
     enableBashIntegration = true;
     extraConfig = ''
       local my_default = wezterm.color.get_default_colors()
-      my_default.foreground = "light grey"
       my_default.brights[5] = "#6464ff"
 
       return {
