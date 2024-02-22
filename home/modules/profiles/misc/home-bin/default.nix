@@ -20,13 +20,13 @@
       --replace feh "${pkgs.feh}/bin/feh"
   '';
 
-  home.file."bin/imv_rifle".source = pkgs.runCommandLocal "home-bin-imv_rifle.rb" {} ''
-    install -m755 ${./imv_rifle.rb} $out
+  #home.file."bin/imv_rifle".source = pkgs.runCommandLocal "home-bin-imv_rifle.rb" {} ''
+  #  install -m755 ${./imv_rifle.rb} $out
 
-    substituteInPlace $out \
-      --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby" \
-      --replace imv "${pkgs.imv}/bin/imv"
-  '';
+  #  substituteInPlace $out \
+  #    --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby" \
+  #    --replace imv "${pkgs.imv}/bin/imv"
+  #'';
 
   home.file."bin/seq-rename".source = pkgs.runCommandLocal "home-bin-seq-rename.rb" {} ''
     install -m755 ${./seq-rename.rb} $out
