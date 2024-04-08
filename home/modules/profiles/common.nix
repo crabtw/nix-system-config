@@ -28,6 +28,7 @@
     ruby
     shellcheck
     niv
+    nushell
   ];
 
   accounts.email.accounts.gmail = {
