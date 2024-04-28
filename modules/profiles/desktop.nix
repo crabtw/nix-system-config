@@ -30,13 +30,14 @@
     ];
   };
 
+  services.libinput = {
+    enable = true;
+    mouse.leftHanded = false;
+  };
+
   services.xserver = {
     enable = true;
     autorun = false;
-    libinput = {
-      enable = true;
-      mouse.leftHanded = false;
-    };
     displayManager.startx.enable = true;
   };
 
