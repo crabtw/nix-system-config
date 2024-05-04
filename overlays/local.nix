@@ -37,4 +37,17 @@ in {
   );
 
   wstunnel-rs = prev.callPackage ../pkgs/wstunnel-rs.nix {};
+
+  imv = let
+      withBackends = [ "libjxl" "libtiff" "libjpeg" "libpng" "librsvg" "libheif" "libnsgif" ];
+
+      libnsgif_patch = prev.fetchpatch {
+        url = "https://lists.sr.ht/~exec64/imv-devel/%3C20240301211856.8170-1-dev@kz6wk9.com%3E/raw";
+        hash = "sha256-4sqEU6SqlYSlvCUpGYs86omIe0SW6J8xqCygiwlwBps=";
+      };
+    in
+      (prev.imv.override { inherit withBackends; }).overrideAttrs (old:
+        assert (old.version == "4.5.0"); {
+        patches = [ libnsgif_patch ];
+      });
 }
