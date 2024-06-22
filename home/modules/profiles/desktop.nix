@@ -130,7 +130,7 @@
   programs.mpv = {
     enable = true;
     config = {
-      profile = "opengl-hq";
+      profile = "high-quality";
       vo = "gpu";
       ao = "pulse";
       hwdec = "vaapi";
