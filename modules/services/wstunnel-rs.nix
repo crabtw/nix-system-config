@@ -59,7 +59,7 @@ let
       default = true;
     };
 
-    package = mkPackageOptionMD pkgs "wstunnel-rs" {};
+    package = mkPackageOption pkgs "wstunnel-rs" {};
 
     autoStart = mkOption {
       description = mdDoc "Whether this tunnel server should be started automatically.";
