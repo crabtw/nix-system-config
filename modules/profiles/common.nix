@@ -27,7 +27,10 @@
     git-lfs
   ];
 
-  programs.vim.defaultEditor = true;
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   programs.tmux = {
     enable = true;
