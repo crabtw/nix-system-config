@@ -10,6 +10,7 @@
   sops.defaultSopsFile = ./secrets/desktop.yaml;
 
   environment.systemPackages = with pkgs; [
+    alsa-utils
     pavucontrol
     libva-utils
     gptfdisk
@@ -42,11 +43,11 @@
   };
 
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    enable = true;
+    type = "fcitx5";
     fcitx5.addons = [ pkgs.fcitx5-chewing ];
   };
 
-  sound.enable = true;
   hardware.pulseaudio.enable = true;
 
   #services.nhi-icc.enable = true;
