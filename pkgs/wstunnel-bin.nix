@@ -2,15 +2,15 @@
 
 let
 
-  version = "9.2.1";
+  version = "10.0.1";
 
 in stdenv.mkDerivation {
-  pname = "wstunnel-rs";
+  pname = "wstunnel-bin";
   inherit version;
 
   src = fetchurl {
     url = "https://github.com/erebe/wstunnel/releases/download/v${version}/wstunnel_${version}_linux_amd64.tar.gz";
-    hash = "sha256-7FrdQzDTmL69qUfrSMRRQYnskWJLmDwlAX9ADa7MHng=";
+    hash = "sha256-gIucG/YlM60oqvVWiC+HSbvgM5puy3MckMBrWlG5HH8=";
   };
 
   sourceRoot = ".";
@@ -22,4 +22,8 @@ in stdenv.mkDerivation {
   installPhase = ''
     install -D -m755 wstunnel $out/bin/wstunnel
   '';
+
+  meta = {
+    mainProgram = "wstunnel";
+  };
 }

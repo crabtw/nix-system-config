@@ -4,7 +4,6 @@
   imports = [
     home-manager.nixosModules.home-manager
     ../services/nhi-icc.nix
-    ../services/wstunnel-rs.nix
     ./services/logrotate.nix
   ];
 

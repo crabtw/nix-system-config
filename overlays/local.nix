@@ -36,7 +36,7 @@ in {
       }
   );
 
-  wstunnel-rs = prev.callPackage ../pkgs/wstunnel-rs.nix {};
+  wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix {};
 
   imv = let
       withBackends = [ "libjxl" "libtiff" "libjpeg" "libpng" "librsvg" "libheif" "libnsgif" ];
