@@ -58,6 +58,8 @@
       my_default.brights[5] = "#6464ff"
 
       return {
+          front_end = "WebGpu",
+
           font = wezterm.font_with_fallback({
               "Inconsolata Nerd Font Mono",
               "Noto Sans CJK TC",
