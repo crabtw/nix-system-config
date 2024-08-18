@@ -32,15 +32,16 @@
     export LANG="zh_TW.UTF-8"
     export LC_ALL="zh_TW.UTF-8"
 
-    export XMODIFIERS="@im=fcitx"
-    export GTK_IM_MODULE="fcitx"
-    export QT_IM_MODULE="fcitx"
+    systemctl --user import-environment \
+      DBUS_SESSION_BUS_ADDRESS \
+      DISPLAY \
+      SSH_AUTH_SOCK \
+      XAUTHORITY \
+      XDG_DATA_DIRS \
+      XDG_RUNTIME_DIR \
+      XDG_SESSION_ID
 
-    DBUS_ADDR="/run/user/$(id -u)/bus"
-    if ! test -e "$DBUS_ADDR"; then
-      dbus-daemon --session --address="unix:path=$DBUS_ADDR" &
-    fi
-    systemctl --user import-environment DISPLAY XAUTHORITY
+    systemctl --user start graphical-session-pre.target
     systemctl --user start graphical-session.target
 
     fcitx5 -d -r
@@ -53,6 +54,22 @@
       --edge top --align right --SetDockType true --SetPartialStrut true \
       --expand true --width 10 --transparent true --tint 0x000000 --height 18 &
     ${pkgs.xorg.xsetroot}/bin/xsetroot -cursor_name left_ptr -fg gray -bg black -solid black &
-    exec ${pkgs.xmonad-with-packages}/bin/xmonad
+    ${pkgs.xmonad-with-packages}/bin/xmonad
+
+    systemctl --user stop graphical-session.target
+    systemctl --user stop graphical-session-pre.target
+
+    while [ -n "$(systemctl --user --no-legend --state=deactivating list-units)" ]; do
+      sleep 0.5
+    done
+
+    systemctl --user unset-environment \
+      DBUS_SESSION_BUS_ADDRESS \
+      DISPLAY \
+      SSH_AUTH_SOCK \
+      XAUTHORITY \
+      XDG_DATA_DIRS \
+      XDG_RUNTIME_DIR \
+      XDG_SESSION_ID
   '';
 }
