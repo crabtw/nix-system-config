@@ -134,7 +134,7 @@
     config = {
       profile = "high-quality";
       vo = "gpu";
-      ao = "pulse";
+      ao = "pipewire";
       hwdec = "vaapi";
       volume-max = "300";
     };

@@ -48,7 +48,14 @@
     fcitx5.addons = [ pkgs.fcitx5-chewing ];
   };
 
-  hardware.pulseaudio.enable = true;
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   #services.nhi-icc.enable = true;
   #nixpkgs.config.permittedInsecurePackages = [
