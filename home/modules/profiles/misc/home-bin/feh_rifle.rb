@@ -1,30 +1,33 @@
 #!/usr/bin/env ruby
 
-def nat_ord s
+def split(s)
   s.split(/(\d+)|(\D+)/).select {|c| c != ''}.map do |c|
     x = c.to_i
     x > 0 || c[0] == '0' ? x : c
   end
 end
 
-class Fixnum
-  alias :old_cmp :<=>
-  def <=> a
-    case a
-      when Fixnum then old_cmp a
-      when String then -1
+def nat_ord(a, b)
+  for x in split(a).zip(split(b))
+    case x
+    in nil, nil
+      return 0
+    in nil, _
+      return -1
+    in _, nil
+      return 1
+    in Integer, String
+      return -1
+    in String, Integer
+      return 1
+    in a, b
+      raise "invalid argument type" if a.class != b.class
+      cmp = a <=> b
+      return cmp if cmp != 0
     end
   end
-end
 
-class String
-  alias :old_cmp :<=>
-  def <=> a
-    case a
-      when String then old_cmp a
-      when Fixnum then 1
-    end
-  end
+  0
 end
 
 if __FILE__ == $0
@@ -36,7 +39,7 @@ if __FILE__ == $0
   Dir.chdir dir
   all = Dir.entries('.').select do |f|
     f =~ /\.(jpe?g|png|bmp|gif)$/i
-  end.sort_by {|f| nat_ord f}
+  end.sort {|a, b| nat_ord(a, b)}
 
   exec 'feh', '--start-at', file, '-F', '-Y', *all
 end
