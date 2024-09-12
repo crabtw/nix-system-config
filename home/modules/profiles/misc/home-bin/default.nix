@@ -3,6 +3,8 @@
 {
   home.sessionVariables.PATH = "$HOME/bin:$PATH";
 
+  home.file."bin/utils.rb".source = ./utils.rb;
+
   home.file."bin/dmenu_run".source = pkgs.runCommandLocal "home-bin-dmenu_run.sh" {} ''
     install -m755 ${./dmenu_run.sh} $out
 
