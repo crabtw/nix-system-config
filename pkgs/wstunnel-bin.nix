@@ -2,7 +2,7 @@
 
 let
 
-  version = "10.0.1";
+  version = "10.1.5";
 
 in stdenv.mkDerivation {
   pname = "wstunnel-bin";
@@ -10,7 +10,7 @@ in stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/erebe/wstunnel/releases/download/v${version}/wstunnel_${version}_linux_amd64.tar.gz";
-    hash = "sha256-gIucG/YlM60oqvVWiC+HSbvgM5puy3MckMBrWlG5HH8=";
+    hash = "sha256-xlDkwei+1Ir4v/6uJt6shhcJvZtOvS/aC/ZDF0TsbDM=";
   };
 
   sourceRoot = ".";
