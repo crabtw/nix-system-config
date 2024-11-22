@@ -42,8 +42,8 @@ in {
       withBackends = [ "libjxl" "libtiff" "libjpeg" "libpng" "librsvg" "libheif" "libnsgif" ];
 
       libnsgif_patch = prev.fetchpatch {
-        url = "https://lists.sr.ht/~exec64/imv-devel/%3C20240301211856.8170-1-dev@kz6wk9.com%3E/raw";
-        hash = "sha256-4sqEU6SqlYSlvCUpGYs86omIe0SW6J8xqCygiwlwBps=";
+        url = "https://lists.sr.ht/~exec64/imv-devel/%3C20241113012702.30521-2-reallyjohnreed@gmail.com%3E/raw";
+        hash = "sha256-/OQeDfIkPtJIIZwL8jYVRy0B7LSBi9/NvAdPoDm851k=";
       };
     in
       (prev.imv.override { inherit withBackends; }).overrideAttrs (old:
