@@ -18,7 +18,7 @@
     freefont_ttf
     liberation_ttf
 
-    inconsolata-nerdfont
+    nerd-fonts.inconsolata
   ];
 
   fonts.fontconfig.useEmbeddedBitmaps = true;
