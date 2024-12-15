@@ -35,7 +35,7 @@
     neww -n wasmtime -c ~/src/wasmtime
     neww -n CompCert -c ~/src/CompCert
     neww -n sail -c ~/src/sail
-    neww -n regalloc2 -c ~/src/regalloc2
+    neww -n regalloc3 -c ~/src/regalloc3
     neww -n zig -c ~/src/zig
 
     neww -c ~
