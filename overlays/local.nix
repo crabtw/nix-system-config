@@ -50,6 +50,4 @@ in {
         assert (old.version == "4.5.0"); {
         patches = [ libnsgif_patch ];
       });
-
-  vmware-horizon-client = prev.callPackage ../pkgs/vmware-horizon-client.nix {};
 }
