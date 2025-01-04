@@ -52,8 +52,4 @@ in {
       });
 
   vmware-horizon-client = prev.callPackage ../pkgs/vmware-horizon-client.nix {};
-
-  mplayer = prev.mplayer.overrideAttrs (old: {
-    NIX_CFLAGS_COMPILE = "-Wno-incompatible-pointer-types -Wno-implicit-function-declaration -Wno-int-conversion";
-  });
 }
