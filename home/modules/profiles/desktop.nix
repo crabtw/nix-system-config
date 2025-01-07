@@ -86,6 +86,40 @@
     '';
   };
 
+  programs.ghostty = {
+    enable = true;
+    enableBashIntegration = true;
+    settings = {
+      theme = "ayu";
+      background = "black";
+      foreground = "light grey";
+      palette = "12=#6464ff";
+
+      cursor-style = "block";
+      cursor-style-blink = false;
+      cursor-invert-fg-bg = true;
+      mouse-hide-while-typing = true;
+
+      window-decoration = false;
+      gtk-titlebar = false;
+      gtk-adwaita = false;
+      scrollback-limit = 50000;
+
+      font-size = 13;
+      font-family = [
+        "Inconsolata Nerd Font Mono"
+        "Noto Sans CJK TC"
+        "Noto Sans CJK JP"
+        "Noto Sans CJK SC"
+        "AR PL New Sung Mono"
+        "IPAexGothic"
+        "DejaVu Sans Mono"
+        "FreeMono"
+      ];
+      font-feature = ["-calt" "-liga" "-dlig"];
+    };
+  };
+
   programs.rtorrent = {
     enable = true;
     extraConfig =
