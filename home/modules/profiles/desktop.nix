@@ -58,7 +58,7 @@
       my_default.brights[5] = "#6464ff"
 
       return {
-          front_end = "WebGpu",
+          front_end = "OpenGL",
 
           font = wezterm.font_with_fallback({
               "Inconsolata Nerd Font Mono",
@@ -82,6 +82,8 @@
           scrollback_lines = 50000,
 
           use_ime = true,
+
+          force_reverse_video_cursor = true,
       }
     '';
   };
