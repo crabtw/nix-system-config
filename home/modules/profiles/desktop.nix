@@ -82,8 +82,6 @@
           scrollback_lines = 50000,
 
           use_ime = true,
-
-          force_reverse_video_cursor = true,
       }
     '';
   };
@@ -99,7 +97,6 @@
 
       cursor-style = "block";
       cursor-style-blink = false;
-      cursor-invert-fg-bg = true;
       mouse-hide-while-typing = true;
 
       window-decoration = false;
