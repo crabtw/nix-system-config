@@ -53,6 +53,7 @@
     enable = true;
     userName = gmail.realName;
     userEmail = gmail.address;
+    signing.format = "ssh";
     aliases = {
       pullall = "!git pull && git submodule sync && git submodule update --init --recursive --progress";
     };
