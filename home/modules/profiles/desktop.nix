@@ -24,7 +24,12 @@
     lm_sensors
   ];
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    nativeMessagingHosts = [
+      pkgs.vdhcoapp
+    ];
+  };
 
   programs.chromium.enable = true;
 
