@@ -50,4 +50,25 @@ in {
         assert (old.version == "4.5.0"); {
         patches = [ libnsgif_patch ];
       });
+
+  ranger = let
+      ncurses_patch1 = prev.fetchpatch {
+        url = "https://gitlab.archlinux.org/archlinux/packaging/packages/ranger/-/raw/main/ranger-1.9.4-fix-ncurses-endwin-error-1.patch?ref_type=heads&inline=false";
+        hash = "sha256-/vII8FyoQNfu6U9YXOWwBk+1WN7Ffe6OwvLuYUL5854=";
+      };
+
+      ncurses_patch2 = prev.fetchpatch {
+        url = "https://gitlab.archlinux.org/archlinux/packaging/packages/ranger/-/raw/main/ranger-1.9.4-fix-ncurses-endwin-error-2.patch?ref_type=heads&inline=false";
+        hash = "sha256-jDr2Hqmhy4nAZijGHg77aoLHOB4p7oANxwx1E2NMZOk=";
+      };
+
+      ncurses_patch3 = prev.fetchpatch {
+        url = "https://gitlab.archlinux.org/archlinux/packaging/packages/ranger/-/raw/main/ranger-1.9.4-fix-ncurses-endwin-error-3.patch?ref_type=heads&inline=false";
+        hash = "sha256-QekaSj5tuxgL1emjaPAg+xVNfCyyZp/EviKL6ZxkydU=";
+      };
+    in
+      prev.ranger.overrideAttrs (old:
+        assert (old.version == "1.9.4"); {
+        patches = [ ncurses_patch2 ncurses_patch1 ncurses_patch3 ];
+      });
 }
