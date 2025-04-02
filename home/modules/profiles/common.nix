@@ -29,6 +29,7 @@
     shellcheck
     niv
     nushell
+    nixfmt-rfc-style
   ];
 
   accounts.email.accounts.gmail = {
