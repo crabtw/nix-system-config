@@ -1,4 +1,5 @@
-{ nixpkgs, home-manager, ... }: { options, pkgs, ... }:
+{ nixpkgs, home-manager, ... }:
+{ options, pkgs, ... }:
 
 {
   imports = [

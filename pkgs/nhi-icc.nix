@@ -1,4 +1,10 @@
-{ stdenv, buildFHSUserEnv, fetchurl, unzip, openssl_1_0_2 }:
+{
+  stdenv,
+  buildFHSUserEnv,
+  fetchurl,
+  unzip,
+  openssl_1_0_2,
+}:
 
 let
 
@@ -40,11 +46,12 @@ let
     patches = old.patches ++ [ openssl_1_0_2_verSymPatch ];
   });
 
-in buildFHSUserEnv {
+in
+buildFHSUserEnv {
   name = "nhi-icc";
 
-  targetPkgs = pkgs:
-    with pkgs; [
+  targetPkgs =
+    pkgs: with pkgs; [
       nhiiccFiles
       pcsclite
       openssl_1_0_2_verSym

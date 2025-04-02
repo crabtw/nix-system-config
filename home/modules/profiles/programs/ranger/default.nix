@@ -6,7 +6,7 @@
     atool
   ];
 
-  xdg.configFile."ranger/commands.py".source = pkgs.runCommandLocal "ranger-config-command.py" {} ''
+  xdg.configFile."ranger/commands.py".source = pkgs.runCommandLocal "ranger-config-command.py" { } ''
     install -m644 ${./commands.py} $out
 
     substituteInPlace $out \
@@ -15,7 +15,7 @@
       --replace mencoder "${pkgs.mplayer}/bin/mencoder"
   '';
 
-  xdg.configFile."ranger/rifle.conf".source = pkgs.runCommandLocal "ranger-config-rifle.conf" {} ''
+  xdg.configFile."ranger/rifle.conf".source = pkgs.runCommandLocal "ranger-config-rifle.conf" { } ''
     install -m644 ${pkgs.ranger}/share/doc/ranger/config/rifle.conf $out
 
     sed -E -i \

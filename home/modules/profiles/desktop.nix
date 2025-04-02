@@ -120,7 +120,11 @@
         "DejaVu Sans Mono"
         "FreeMono"
       ];
-      font-feature = ["-calt" "-liga" "-dlig"];
+      font-feature = [
+        "-calt"
+        "-liga"
+        "-dlig"
+      ];
     };
   };
 
@@ -135,36 +139,36 @@
         sessionDir = "${home}/tmp/rt-session";
         torrentDir = "${home}/download/torrents";
       in
-        ''
-          throttle.max_peers.normal.set = 300
+      ''
+        throttle.max_peers.normal.set = 300
 
-          throttle.max_peers.seed.set = 3
-          throttle.max_uploads.set = 3
+        throttle.max_peers.seed.set = 3
+        throttle.max_uploads.set = 3
 
-          throttle.global_down.max_rate.set_kb = ${toString downloadRate}
-          throttle.global_up.max_rate.set_kb = ${toString uploadRate}
+        throttle.global_down.max_rate.set_kb = ${toString downloadRate}
+        throttle.global_up.max_rate.set_kb = ${toString uploadRate}
 
-          directory.default.set = ${downloadDir}
+        directory.default.set = ${downloadDir}
 
-          session.path.set = ${sessionDir}
+        session.path.set = ${sessionDir}
 
-          schedule2 = watch_directory,5,5,load.start=${torrentDir}/*.torrent
-          schedule2 = untied_directory,5,5,stop_untied=
+        schedule2 = watch_directory,5,5,load.start=${torrentDir}/*.torrent
+        schedule2 = untied_directory,5,5,stop_untied=
 
-          network.port_range.set = 38900-39990
-          network.port_random.set = yes
+        network.port_range.set = 38900-39990
+        network.port_random.set = yes
 
-          trackers.use_udp.set = yes
+        trackers.use_udp.set = yes
 
-          protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+        protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
-          dht.mode.set = on
-          dht.port.set = 38838
+        dht.mode.set = on
+        dht.port.set = 38838
 
-          protocol.pex.set = yes
+        protocol.pex.set = yes
 
-          ui.torrent_list.layout.set = "full"
-        '';
+        ui.torrent_list.layout.set = "full"
+      '';
   };
 
   programs.mpv = {

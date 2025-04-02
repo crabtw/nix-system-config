@@ -28,10 +28,10 @@
     <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
     <fontconfig>
 
-    ${lib.concatMapStringsSep "\n" lib.readFile
-      [ ./noto-fonts.conf
-        ./wqy-unibit.conf
-      ]}
+    ${lib.concatMapStringsSep "\n" lib.readFile [
+      ./noto-fonts.conf
+      ./wqy-unibit.conf
+    ]}
 
     </fontconfig>
   '';

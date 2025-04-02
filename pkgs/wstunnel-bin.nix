@@ -4,7 +4,8 @@ let
 
   version = "10.1.5";
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   pname = "wstunnel-bin";
   inherit version;
 

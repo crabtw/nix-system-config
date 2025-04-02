@@ -22,7 +22,7 @@
     '';
   };
 
-  sops.secrets.pppd-secret-options = {};
+  sops.secrets.pppd-secret-options = { };
 
   sops.secrets.pap-secrets.path = "/etc/ppp/pap-secrets";
 }

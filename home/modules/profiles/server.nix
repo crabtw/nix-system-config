@@ -18,7 +18,7 @@
     delay = "30min";
   };
 
-  programs.tmux.extraConfig =  ''
+  programs.tmux.extraConfig = ''
     new  -n irc
     neww -n wawabook -c ~/db/wawabook
     neww -n nix-system-config -c ~/src/nix-system-config

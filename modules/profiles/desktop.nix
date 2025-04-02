@@ -1,4 +1,5 @@
-{ sops-nix, ... }@inputs: { pkgs, ... }:
+{ sops-nix, ... }@inputs:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -27,7 +28,10 @@
   services.openssh = {
     enable = true;
     listenAddresses = [
-      { addr = "127.0.0.1"; port = 22; }
+      {
+        addr = "127.0.0.1";
+        port = 22;
+      }
     ];
   };
 
