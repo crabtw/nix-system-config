@@ -42,29 +42,4 @@ in
     );
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
-
-  imv =
-    let
-      withBackends = [
-        "libjxl"
-        "libtiff"
-        "libjpeg"
-        "libpng"
-        "librsvg"
-        "libheif"
-        "libnsgif"
-      ];
-
-      libnsgif_patch = prev.fetchpatch {
-        url = "https://lists.sr.ht/~exec64/imv-devel/%3C20241113012702.30521-2-reallyjohnreed@gmail.com%3E/raw";
-        hash = "sha256-/OQeDfIkPtJIIZwL8jYVRy0B7LSBi9/NvAdPoDm851k=";
-      };
-    in
-    (prev.imv.override { inherit withBackends; }).overrideAttrs (
-      old:
-      assert (old.version == "4.5.0");
-      {
-        patches = [ libnsgif_patch ];
-      }
-    );
 }
