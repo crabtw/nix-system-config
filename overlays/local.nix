@@ -42,4 +42,6 @@ in
     );
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
+
+  vmware-horizon-client = prev.callPackage ../pkgs/vmware-horizon-client.nix { };
 }
