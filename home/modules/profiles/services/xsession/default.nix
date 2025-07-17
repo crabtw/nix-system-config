@@ -28,6 +28,28 @@
     }
   '';
 
+  systemd.user.targets = {
+    hm-graphical-session = {
+      Unit = {
+        Description = "Home Manager X session";
+        Requires = [
+          "graphical-session-pre.target"
+        ];
+        BindsTo = [
+          "graphical-session.target"
+          "tray.target"
+        ];
+      };
+    };
+
+    tray = {
+      Unit = {
+        Description = "Home Manager System Tray";
+        Requires = [ "graphical-session-pre.target" ];
+      };
+    };
+  };
+
   home.file.".xinitrc".text = ''
     export LANG="zh_TW.UTF-8"
     export LC_ALL="zh_TW.UTF-8"
@@ -41,8 +63,7 @@
       XDG_RUNTIME_DIR \
       XDG_SESSION_ID
 
-    systemctl --user start graphical-session-pre.target
-    systemctl --user start graphical-session.target
+    systemctl --user start hm-graphical-session.target
 
     fcitx5 -d -r
 
