@@ -12,7 +12,7 @@
     # X11
     xsel
     xorg.xdpyinfo
-    vmware-horizon-client
+    omnissa-horizon-client
 
     # utils
     cmus
