@@ -133,8 +133,8 @@
     extraConfig =
       let
         home = config.home.homeDirectory;
-        downloadRate = 3000;
-        uploadRate = 1000;
+        downloadRate = 10000;
+        uploadRate = 10000;
         downloadDir = "${home}/download";
         sessionDir = "${home}/tmp/rt-session";
         torrentDir = "${home}/download/torrents";
@@ -142,8 +142,8 @@
       ''
         throttle.max_peers.normal.set = 300
 
-        throttle.max_peers.seed.set = 3
-        throttle.max_uploads.set = 3
+        throttle.max_peers.seed.set = 10
+        throttle.max_uploads.set = 10
 
         throttle.global_down.max_rate.set_kb = ${toString downloadRate}
         throttle.global_up.max_rate.set_kb = ${toString uploadRate}
