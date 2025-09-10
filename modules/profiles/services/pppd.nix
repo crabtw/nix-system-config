@@ -16,8 +16,6 @@
 
       persist
 
-      +ipv6
-
       file ${config.sops.secrets.pppd-secret-options.path}
     '';
   };
