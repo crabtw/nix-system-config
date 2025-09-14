@@ -162,7 +162,7 @@
 
         protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
-        dht.mode.set = on
+        dht.mode.set = off
         dht.port.set = 38838
 
         protocol.pex.set = yes
