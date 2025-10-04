@@ -18,12 +18,7 @@
     smartmontools
   ];
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      amdvlk
-    ];
-  };
+  hardware.graphics.enable = true;
 
   services.openssh = {
     enable = true;
