@@ -42,4 +42,10 @@ in
     );
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
+
+  glyr = prev.glyr.overrideAttrs (
+    finalAttrs: prevAttrs: {
+      patches = [ ./glyr/0001-Fix-build.patch ];
+    }
+  );
 }

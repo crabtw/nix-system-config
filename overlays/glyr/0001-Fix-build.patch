@@ -1,0 +1,35 @@
+From 0fec8d6021443d9d392404c67f615100b018fb66 Mon Sep 17 00:00:00 2001
+From: Jyun-Yan You <jyyou.tw@gmail.com>
+Date: Thu, 9 Oct 2025 20:51:21 +0800
+Subject: [PATCH 1/1] Fix build
+
+---
+ CMakeLists.txt | 2 +-
+ lib/core.c     | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f9bf068..cb26207 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
++CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+ 
+ # Write in C, write in Ceeee... :-)
+ PROJECT(glyr C)
+diff --git a/lib/core.c b/lib/core.c
+index 86807e6..59cf41d 100644
+--- a/lib/core.c
++++ b/lib/core.c
+@@ -19,6 +19,7 @@
+  **************************************************************/
+ 
+ #include <errno.h>
++#include <curl/curl.h>
+ #include <curl/multi.h>
+ 
+ #include "stringlib.h"
+-- 
+2.51.0
+
