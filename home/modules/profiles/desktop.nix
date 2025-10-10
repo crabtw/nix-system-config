@@ -18,7 +18,7 @@
     cmus
     imagemagick
     ffmpeg
-    abcde
+    cyanrip
     unrar
     p7zip
     lm_sensors
