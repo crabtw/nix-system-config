@@ -52,24 +52,26 @@
 
   programs.git = with config.accounts.email.accounts; {
     enable = true;
-    userName = gmail.realName;
-    userEmail = gmail.address;
-    signing.format = "ssh";
-    aliases = {
-      pullall = "!git pull && git submodule sync && git submodule update --init --recursive --progress";
-    };
-    extraConfig = {
+    settings = {
+      user.name = gmail.realName;
+      user.email = gmail.address;
       pull.rebase = false;
       rerere.enabled = true;
-    };
-    delta = {
-      enable = true;
-      options = {
-        dark = true;
-        line-numbers = true;
+      alias = {
+        pullall = "!git pull && git submodule sync && git submodule update --init --recursive --progress";
       };
     };
+    signing.format = "ssh";
     lfs.enable = true;
+  };
+
+  programs.delta = {
+    enable = true;
+    options = {
+      dark = true;
+      line-numbers = true;
+    };
+    enableGitIntegration = true;
   };
 
   programs.tmux = {
