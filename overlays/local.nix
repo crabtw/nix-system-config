@@ -42,16 +42,4 @@ in
     );
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
-
-  cmus =
-    assert prev.cmus.version == "2.12.0";
-    prev.cmus.override {
-      ffmpeg = prev.ffmpeg_7;
-    };
-
-  mplayer =
-    assert prev.mplayer.version == "1.5-unstable-2024-12-21";
-    prev.mplayer.override {
-      ffmpeg = prev.ffmpeg_7;
-    };
 }
