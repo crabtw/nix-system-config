@@ -43,4 +43,12 @@
     substituteInPlace $out \
       --replace "/usr/bin/env ruby" "${pkgs.ruby}/bin/ruby"
   '';
+
+  home.file."bin/img2jpg".source = pkgs.runCommandLocal "home-bin-img2jpg.sh" { } ''
+    install -m755 ${./img2jpg.sh} $out
+
+    substituteInPlace $out \
+      --replace /bin/sh "${pkgs.runtimeShell}" \
+      --replace magick "${pkgs.imagemagick}/bin/magick"
+  '';
 }
