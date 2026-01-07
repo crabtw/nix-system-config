@@ -2,11 +2,11 @@
 
 buildVimPlugin {
   pname = "my-vim";
-  version = "2022-08-08";
+  version = "2026-01-07";
   src = fetchFromGitHub {
     owner = "crabtw";
     repo = "my.vim";
-    rev = "add020f2ba63fd699b7136149c4729cebef1246d";
-    sha256 = "017f5kgn0yn5i00sgzacfyipzknvpy2hsslyihb1a2din4zqfygz";
+    rev = "dfc39b2afcd50c02ab153373a44cb0e3a5e23664";
+    hash = "sha256-soOMifDqhweFsGfSI/gO7oct5wPZt46OIyMgc4RN/bo=";
   };
 }
