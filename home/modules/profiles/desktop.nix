@@ -5,7 +5,8 @@
     ./common.nix
     ./programs/ranger
     ./misc/home-bin
-    ./services/xsession
+    #./services/xsession
+    ./services/wayland
   ];
 
   home.packages = with pkgs; [
@@ -23,6 +24,22 @@
     p7zip
     lm_sensors
   ];
+
+  home.pointerCursor = {
+    enable = true;
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
+  };
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      addons = [ pkgs.fcitx5-chewing ];
+      waylandFrontend = true;
+    };
+  };
 
   programs.firefox = {
     enable = true;

@@ -41,11 +41,7 @@
     displayManager.startx.enable = true;
   };
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.addons = [ pkgs.fcitx5-chewing ];
-  };
+  programs.niri.enable = true;
 
   security.rtkit.enable = true;
 
