@@ -1,7 +1,5 @@
 spawn-at-startup "waybar"
-
 spawn-at-startup "mako"
-
 spawn-at-startup "fcitx5"
 
 environment {
