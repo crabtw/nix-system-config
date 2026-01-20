@@ -19,6 +19,22 @@ layout {
     }
 }
 
+workspace "music"
+
+workspace "browser" {
+    layout {
+        gaps 0
+
+        focus-ring {
+            width 0
+        }
+    }
+}
+
+workspace "server"
+workspace "file-manager"
+workspace "remote-desktop"
+
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
@@ -187,20 +203,20 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
+    Mod+1 { focus-workspace "music"; }
+    Mod+2 { focus-workspace "browser"; }
+    Mod+3 { focus-workspace "server"; }
+    Mod+4 { focus-workspace "file-manager"; }
+    Mod+5 { focus-workspace "remote-desktop"; }
     Mod+6 { focus-workspace 6; }
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+1 { move-column-to-workspace "music"; }
+    Mod+Ctrl+2 { move-column-to-workspace "browser"; }
+    Mod+Ctrl+3 { move-column-to-workspace "server"; }
+    Mod+Ctrl+4 { move-column-to-workspace "file-manager"; }
+    Mod+Ctrl+5 { move-column-to-workspace "remote-desktop"; }
     Mod+Ctrl+6 { move-column-to-workspace 6; }
     Mod+Ctrl+7 { move-column-to-workspace 7; }
     Mod+Ctrl+8 { move-column-to-workspace 8; }

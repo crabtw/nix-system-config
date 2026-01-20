@@ -17,7 +17,10 @@
     settings.mainBar = {
       modules-left = [ "niri/workspaces" ];
       modules-center = [ "niri/window" ];
-      modules-right = [ "clock" "tray" ];
+      modules-right = [
+        "clock"
+        "tray"
+      ];
 
       "clock" = {
         format = "{:%Y-%m-%d, %H:%M}";
