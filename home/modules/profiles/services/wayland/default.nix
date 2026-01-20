@@ -28,11 +28,24 @@
     };
   };
 
+  services.swayidle = {
+    enable = true;
+
+    timeouts = [
+      {
+        timeout = 300;
+        command = "swaylock -f -F -e";
+      }
+      {
+        timeout = 600;
+        command = "niri msg action power-off-monitors";
+      }
+    ];
+  };
+
   services.mako.enable = true;
 
   services.polkit-gnome.enable = true;
-
-  services.swayidle.enable = true;
 
   programs.swaylock.enable = true;
 
