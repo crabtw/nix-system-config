@@ -41,12 +41,7 @@
     };
   };
 
-  programs.firefox = {
-    enable = true;
-    nativeMessagingHosts = [
-      pkgs.vdhcoapp
-    ];
-  };
+  programs.firefox.enable = true;
 
   programs.chromium.enable = true;
 
