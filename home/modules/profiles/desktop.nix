@@ -12,7 +12,7 @@
   home.packages = with pkgs; [
     # X11
     xsel
-    xorg.xdpyinfo
+    xdpyinfo
     omnissa-horizon-client
 
     # utils

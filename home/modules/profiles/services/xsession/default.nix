@@ -68,13 +68,13 @@
     fcitx5 -d -r
 
     # common
-    ${pkgs.xorg.xrdb}/bin/xrdb -merge $HOME/.Xresources
+    ${pkgs.xrdb}/bin/xrdb -merge $HOME/.Xresources
 
     # xmonad
     ${pkgs.trayer}/bin/trayer \
       --edge top --align right --SetDockType true --SetPartialStrut true \
       --expand true --width 10 --transparent true --tint 0x000000 --height 18 &
-    ${pkgs.xorg.xsetroot}/bin/xsetroot -cursor_name left_ptr -fg gray -bg black -solid black &
+    ${pkgs.xsetroot}/bin/xsetroot -cursor_name left_ptr -fg gray -bg black -solid black &
     ${pkgs.xmonad-with-packages}/bin/xmonad
 
     systemctl --user stop graphical-session.target
