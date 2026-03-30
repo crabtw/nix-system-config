@@ -19,7 +19,7 @@ layout {
     }
 }
 
-workspace "music"
+workspace "misc"
 workspace "browser"
 workspace "server"
 workspace "file-manager"
@@ -193,7 +193,7 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    Mod+1 { focus-workspace "music"; }
+    Mod+1 { focus-workspace "misc"; }
     Mod+2 { focus-workspace "browser"; }
     Mod+3 { focus-workspace "server"; }
     Mod+4 { focus-workspace "file-manager"; }
@@ -202,7 +202,7 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace "music"; }
+    Mod+Ctrl+1 { move-column-to-workspace "misc"; }
     Mod+Ctrl+2 { move-column-to-workspace "browser"; }
     Mod+Ctrl+3 { move-column-to-workspace "server"; }
     Mod+Ctrl+4 { move-column-to-workspace "file-manager"; }
