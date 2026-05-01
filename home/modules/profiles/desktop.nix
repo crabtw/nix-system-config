@@ -70,10 +70,6 @@
     enable = true;
     enableBashIntegration = true;
     extraConfig = ''
-      local my_default = wezterm.color.get_default_colors()
-      my_default.foreground = "light grey"
-      my_default.brights[5] = "#6464ff"
-
       return {
           front_end = "OpenGL",
 
@@ -90,10 +86,11 @@
           font_size = 13.0,
           harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
 
-          color_schemes = {
-              ["My Default"] = my_default,
+          color_scheme = "ayu",
+          colors = {
+              foreground = "light grey",
+              background = "black",
           },
-          color_scheme = "My Default",
 
           enable_tab_bar = false,
           scrollback_lines = 50000,
@@ -107,10 +104,9 @@
     enable = true;
     enableBashIntegration = true;
     settings = {
-      theme = "ayu";
+      theme = "Ayu";
       background = "black";
       foreground = "light grey";
-      palette = "12=#6464ff";
 
       cursor-style = "block";
       cursor-style-blink = false;
@@ -118,8 +114,9 @@
 
       window-decoration = false;
       gtk-titlebar = false;
-      gtk-adwaita = false;
       scrollback-limit = 50000;
+
+      shell-integration-features = [ "no-cursor" ];
 
       font-size = 13;
       font-family = [
@@ -184,6 +181,9 @@
 
   programs.mpv = {
     enable = true;
+    package = pkgs.mpv.override {
+      youtubeSupport = false;
+    };
     config = {
       profile = "high-quality";
       vo = "gpu";
