@@ -41,6 +41,8 @@ in
       }
     );
 
+  wawabook-bin = prev.callPackage ../pkgs/wawabook-bin.nix { };
+
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
 
   libtorrent-rakshasa =

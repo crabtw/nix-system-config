@@ -1,4 +1,8 @@
-{ stdenv, fetchurl }:
+{
+  stdenv,
+  fetchurl,
+  zstd,
+}:
 
 let
 
@@ -11,8 +15,10 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/crabtw/wawabook/releases/download/v${version}/wawabook-v${version}-x86_64-unknown-linux-musl.tar.zstd";
-    hash = "";
+    hash = "sha256-Iv7n7c8VFKOBo/Whc7Hpsui9DHod8QHeFjWaf2RqlCk=";
   };
+
+  nativeBuildInputs = [ zstd ];
 
   dontConfigure = true;
   dontBuild = true;
