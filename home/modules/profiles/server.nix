@@ -6,7 +6,7 @@
   ];
 
   home.packages = with pkgs; [
-    haskellPackages.wawabook
+    wawabook-bin
     wstunnel-bin
   ];
 

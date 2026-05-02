@@ -67,7 +67,7 @@ in
               DB_NAME="$(${pkgs.coreutils}/bin/date +%Y-%m-%d).txt"
 
               ${pkgs.coreutils}/bin/mkdir -p $DB_DIR
-              ${pkgs.haskellPackages.wawabook}/bin/wawabook >$DB_DIR/$DB_NAME
+              ${pkgs.wawabook-bin}/bin/wawabook >$DB_DIR/$DB_NAME
             ''
           );
         };
