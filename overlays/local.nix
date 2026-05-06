@@ -45,38 +45,6 @@ in
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
 
-  libtorrent-rakshasa =
-    assert prev.libtorrent-rakshasa.version == "0.16.8";
-    prev.libtorrent-rakshasa.overrideAttrs (
-      finalAttrs: prevAttrs: {
-        version = "0.16.11";
-
-        src = pkgs.fetchFromGitHub {
-          owner = "rakshasa";
-          repo = "libtorrent";
-          tag = "v${finalAttrs.version}";
-          hash = "sha256-T8Td2bQlO21ieXdJ+oZ4GytJiGxb9AcgBsygl8yMrpI=";
-        };
-      }
-    );
-
-  rtorrent =
-    assert prev.rtorrent.version == "0.16.8";
-    prev.rtorrent.overrideAttrs (
-      finalAttrs: prevAttrs: {
-        version = "0.16.11";
-
-        src = pkgs.fetchFromGitHub {
-          owner = "rakshasa";
-          repo = "rtorrent";
-          tag = "v${finalAttrs.version}";
-          hash = "sha256-OEIJMBj1UfIOpR1w8c8ztKWJVD5hKxiJaxweF7mBRNM=";
-        };
-
-        doInstallCheck = false;
-      }
-    );
-
   xwayland-satellite =
     assert prev.xwayland-satellite.version == "0.8.1";
     prev.xwayland-satellite.overrideAttrs (
