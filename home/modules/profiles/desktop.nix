@@ -167,8 +167,6 @@
         network.port_range.set = 38900-39990
         network.port_random.set = yes
 
-        trackers.use_udp.set = yes
-
         protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 
         dht.mode.set = auto
