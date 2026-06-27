@@ -21,7 +21,7 @@
     ffmpeg
     cyanrip
     unrar
-    p7zip
+    _7zz
     lm_sensors
   ];
 
