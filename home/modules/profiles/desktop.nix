@@ -161,8 +161,8 @@
 
         session.path.set = ${sessionDir}
 
-        schedule2 = watch_directory,5,5,load.start=${torrentDir}/*.torrent
-        schedule2 = untied_directory,5,5,stop_untied=
+        schedule = watch_directory,5,5,load.start=${torrentDir}/*.torrent
+        schedule = untied_directory,5,5,stop_untied=
 
         network.port_range.set = 38900-39990
         network.port_random.set = yes
