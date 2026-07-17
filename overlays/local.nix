@@ -49,13 +49,13 @@ in
     assert prev.rtorrent.version == "0.16.17";
     prev.rtorrent.overrideAttrs (
       finalAttrs: prevAttrs: {
-        version = "0.16.13";
+        version = "0.16.18";
 
         src = pkgs.fetchFromGitHub {
           owner = "rakshasa";
           repo = "rtorrent";
           tag = "v${finalAttrs.version}";
-          hash = "sha256-QvABQKKH/4KUbG6mSkvfcqMpX552nAKp1vZerin2sLA=";
+          hash = "sha256-vDt5zbLk8eQceJGw+MV/V9cCKW1uVJqsbWI7XHaTt/U=";
         };
 
         doInstallCheck = false;
@@ -66,13 +66,13 @@ in
     assert prev.libtorrent-rakshasa.version == "0.16.17";
     prev.libtorrent-rakshasa.overrideAttrs (
       finalAttrs: prevAttrs: {
-        version = "0.16.13";
+        version = "0.16.18";
 
         src = pkgs.fetchFromGitHub {
           owner = "rakshasa";
           repo = "libtorrent";
           tag = "v${finalAttrs.version}";
-          hash = "sha256-PRVSH2kOzQhmUSdueDSB9stLwCtbITisuvpysrw4M+I=";
+          hash = "sha256-Da+w1HMKgO6uaM7ORiKvlZLoHp8NURI4dgPPUl97834=";
         };
       }
     );
