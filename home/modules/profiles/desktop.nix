@@ -164,10 +164,9 @@
         schedule = watch_directory,5,5,load.start=${torrentDir}/*.torrent
         schedule = untied_directory,5,5,stop_untied=
 
-        network.port_range.set = 38900-39990
-        network.port_random.set = yes
+        network.listen.port.set = 39429
 
-        protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+        protocol.encryption.set = prefer
 
         dht.mode.set = auto
 
