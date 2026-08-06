@@ -44,17 +44,4 @@ in
   wawabook-bin = prev.callPackage ../pkgs/wawabook-bin.nix { };
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
-
-  xwayland-satellite =
-    assert prev.xwayland-satellite.version == "0.8.1";
-    prev.xwayland-satellite.overrideAttrs (
-      finalAttrs: prevAttrs: {
-        patches = [
-          (pkgs.fetchpatch {
-            url = "https://github.com/Supreeeme/xwayland-satellite/commit/10f985b84cdbcc3bbf35b3e7e43d1b2a84fa9ce2.patch";
-            hash = "sha256-caWdCnbD4Yf7U9mdeMwYP1/xDjGg1jNvL1y2pq/C2GM=";
-          })
-        ];
-      }
-    );
 }
