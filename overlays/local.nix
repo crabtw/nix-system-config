@@ -44,4 +44,8 @@ in
   wawabook-bin = prev.callPackage ../pkgs/wawabook-bin.nix { };
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
+
+  cyanrip = prev.cyanrip.override {
+    ffmpeg-headless = prev.ffmpeg_8-headless;
+  };
 }
