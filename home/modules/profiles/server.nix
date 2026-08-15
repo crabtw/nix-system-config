@@ -41,10 +41,4 @@
     neww -c ~
     selectw -t 0
   '';
-
-  programs.git.settings.pack = {
-    windowMemory = "25m";
-    packSizeLimit = "100m";
-    window = 5;
-  };
 }
