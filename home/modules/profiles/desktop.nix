@@ -48,7 +48,7 @@
   programs.zathura.enable = true;
 
   programs.urxvt = {
-    enable = true;
+    enable = false;
     package = pkgs.rxvt-unicode;
     scroll.bar.enable = false;
     iso14755 = false;
