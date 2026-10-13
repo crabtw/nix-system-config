@@ -44,4 +44,36 @@ in
   wawabook-bin = prev.callPackage ../pkgs/wawabook-bin.nix { };
 
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
+
+  libtorrent-rakshasa =
+    assert prev.libtorrent-rakshasa.version == "0.16.22";
+    prev.libtorrent-rakshasa.overrideAttrs (
+      finalAttrs: prevAttrs: {
+        version = "0.16.25";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "rakshasa";
+          repo = "libtorrent";
+          tag = "v${finalAttrs.version}";
+          hash = "sha256-WxhAu2BXxlqPidoItMXnKyw5uTUk9ogmUBWohIdvQSo=";
+        };
+      }
+    );
+
+  rtorrent =
+    assert prev.rtorrent.version == "0.16.22";
+    prev.rtorrent.overrideAttrs (
+      finalAttrs: prevAttrs: {
+        version = "0.16.25";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "rakshasa";
+          repo = "rtorrent";
+          tag = "v${finalAttrs.version}";
+          hash = "sha256-uZ1Y3fKOv0KaUBRjuanEkkB88E+U8/cOBEcFrLjiHC0=";
+        };
+
+        doInstallCheck = false;
+      }
+    );
 }
