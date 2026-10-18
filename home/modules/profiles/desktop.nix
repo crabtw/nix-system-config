@@ -47,25 +47,6 @@
 
   programs.zathura.enable = true;
 
-  programs.urxvt = {
-    enable = false;
-    package = pkgs.rxvt-unicode;
-    scroll.bar.enable = false;
-    iso14755 = false;
-    fonts = [
-      "xft:Inconsolata Nerd Font Mono:pixelsize=17"
-      "xft:AR PL New Sung Mono:pixelsize=16"
-      "xft:IPAexGothic:pixelsize=16"
-      "xft:DejaVu Sans Mono:pixelsize=16"
-      "xft:FreeMono:pixelsize=16"
-    ];
-    extraConfig = {
-      "background" = "black";
-      "foreground" = "lightgray";
-      "color12" = "#6464ff";
-    };
-  };
-
   programs.wezterm = {
     enable = true;
     enableBashIntegration = true;
