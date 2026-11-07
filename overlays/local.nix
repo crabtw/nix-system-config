@@ -76,4 +76,6 @@ in
         doInstallCheck = false;
       }
     );
+
+  omnissa-horizon-client = prev.callPackage ./omnissa-horizon-client.nix { };
 }
