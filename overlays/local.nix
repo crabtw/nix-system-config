@@ -46,4 +46,6 @@ in
   wstunnel-bin = prev.callPackage ../pkgs/wstunnel-bin.nix { };
 
   omnissa-horizon-client = prev.callPackage ./omnissa-horizon-client.nix { };
+
+  vopono = prev.callPackage ./vopono.nix { };
 }
