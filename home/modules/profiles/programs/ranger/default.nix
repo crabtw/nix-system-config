@@ -11,8 +11,7 @@
 
     substituteInPlace $out \
       --replace aunpack "${pkgs.atool}/bin/aunpack" \
-      --replace ffmpeg "${pkgs.ffmpeg}/bin/ffmpeg" \
-      --replace mencoder "${pkgs.mplayer}/bin/mencoder"
+      --replace ffmpeg "${pkgs.ffmpeg}/bin/ffmpeg"
   '';
 
   xdg.configFile."ranger/rifle.conf".source = pkgs.runCommandLocal "ranger-config-rifle.conf" { } ''

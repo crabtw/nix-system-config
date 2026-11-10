@@ -13,6 +13,4 @@ class conv2mkv(Command):
         for f in fm.thisdir.get_selection():
             out = f.basename + '.mkv'
             proc = fm.run(['ffmpeg', '-i', f.basename, '-map', '0',  '-vcodec', 'copy', '-acodec', 'copy', out])
-            if proc.wait() != 0:
-                fm.run(['mencoder', '-o', out, '-ovc', 'copy', '-oac', 'copy', '-of', 'lavf', '-lavfopts', 'format=matroska', f.basename])
             fm.thisdir.mark_item(f, False)
